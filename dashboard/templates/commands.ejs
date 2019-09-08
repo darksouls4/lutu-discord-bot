@@ -1,0 +1,80 @@
+<%- include('blocks/header', {bot, user, path}) %>
+
+<style>
+  .card:hover {
+    -webkit-animation: mover 1.5s infinite alternate;
+    animation: mover 1.5s infinite alternate;
+    -webkit-animation-timing-function: ease-in-out;
+   	animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+  }
+
+  @-webkit-keyframes mover {
+  	0% { 
+  		transform: translateY(0); 
+  	}
+
+  	100% { 
+  	  transform: translateY(-8px); 
+  	}
+  }
+
+  @keyframes mover {
+    0% { 
+  	  transform: translateY(0); 
+  	}
+
+    100% { 
+  	  transform: translateY(-8px); 
+  	}
+  }
+</style>
+
+<% const help = {};
+bot.commands.forEach((command) => {
+  const cat = command.help.category;
+  if (!help.hasOwnProperty(cat)) help[cat] = [];
+  help[cat].push(command);
+});
+%>
+  <% for (const category in help) { %>
+    <h3 class="cmd-title"><%= category %></h3>
+    <br>
+    <div class="card-columns">
+      <% for (const command of help[category]) { %>
+        <div class="card">
+          <h3 class="card-header"><%= command.help.name.toProperCase() %></h3>
+          <div class="card-body">
+            <p class="card-text"><%= command.help.description %></p>
+            <p><strong>Aliases:</strong> <%= `${command.conf.aliases.join(', ')}` %></p>
+            <p><strong>Category:</strong> <%= `${command.help.category}` %></p>
+            <p><strong>Permission Level:</strong> <%= `${command.conf.permLevel}` %></p>
+            <p><strong>Require Arguments:</strong> <%= `${command.conf.args === true ? "Yes" : "No"}` %></p>
+            <p><strong>Cooldown:</strong> <%= `${command.conf.cooldown} Seconds` %></p>
+            <p><strong>Usage:</strong> <kbd><%= `?${command.help.name} ${command.help.usage}` %></kbd></p>
+            <p><strong>Enabled:</strong> <%= `${command.conf.enabled === true ? "Yes" : "No"}` %></p>
+            <p><strong>Usable in DMs:</strong> <%= `${command.conf.guildOnly === true ? "No" : "Yes"}` %></p></p>
+            <!-- <h6 class="card-subtitle text-muted">Permission: <%= command.conf.permLevel %><br /><a href="#" data-toggle="modal" data-target="#<%= `${command.help.name}` %>Modal">more...</a> -->
+            </h6>
+          </div>
+        </div>
+        <!-- <div id="<%= `${command.help.name}` %>Modal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header btn-info disabled">
+                <h4 class="modal-title"><%= command.help.name.toProperCase() %></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <p>Usage Example: <%= command.help.usage %></p>
+                <p>Command Aliases: <%= `${command.conf.aliases.join(', ')}` %></p>
+              </div>
+              <div class="modal-footer"><button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button></div>
+            </div>
+          </div>
+        </div> -->
+      <% } %>
+    </div>
+  <% } %>
+<% include ./blocks/footer %>

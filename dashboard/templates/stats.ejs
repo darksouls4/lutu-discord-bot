@@ -1,0 +1,76 @@
+<%- include('blocks/header', {bot, user, path}) %>
+<div class="jumbotron">
+    <div id="carouselContent" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active text-center">
+                <h3>Servers and Users:</h3>
+                <p><i class="fa fa-fw fa-server" aria-hidden="true"></i> Server Count: <%= stats.servers %></p>
+                <p><i class="fa fa-fw fa-users" aria-hidden="true"></i> User Count: <%= stats.members %></p>
+            </div>
+            <div class="carousel-item text-center">
+                <h3>Process Data:</h3>
+                <p><i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Uptime: <%= stats.uptime %></p>
+                <p><i class="fa fa-fw fa-tasks" aria-hidden="true"></i> Memory: <%= stats.memoryUsage %> MBs</p>
+            </div>
+            <div class="carousel-item text-center">
+              <h3>Channels:</h3>
+                <p><i class="fa fa-fw fa-hashtag" aria-hidden="true"></i> Text Channels: <%= stats.text %></p>
+                <p><i class="fa fa-fw fa-microphone" aria-hidden="true"></i> Voice Channels: <%= stats.voice %></p>
+            </div>
+            <div class="carousel-item text-center">
+                <h3>Versions:</h3>
+                <p><i class="fa fa-fw fa-cogs" aria-hidden="true"></i> Discord.js Version: <%= stats.dVersion %></p>
+                <p><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Node.js Version: <%= stats.nVersion %></p>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselContent" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselContent" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+<!--   
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col col-10"><h3>Live Statistics.</h3>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-5 text-nowrap"><i class="fa fa-fw fa-server" aria-hidden="true"></i> Servers:</div>
+        <div class="col-5 text-nowrap"><strong><%= stats.servers %></strong></div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-5 text-nowrap"><i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Uptime:</div>
+        <div class="col-5 text-nowrap"><strong><%= stats.uptime %></strong></div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-5 text-nowrap"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Members:</div>
+        <div class="col-5 text-nowrap"><strong><%= stats.members %></strong></div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-5 text-nowrap"><i class="fa fa-fw fa-tasks" aria-hidden="true"></i> Memory:</div>
+        <div class="col-5 text-nowrap"><strong><%= stats.memoryUsage %> MB</strong></div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-5 text-nowrap"><i class="fa fa-fw fa-hashtag" aria-hidden="true"></i> Text Channels:</div>
+        <div class="col-5 text-nowrap"><strong><%= stats.text %></strong></div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-5 text-nowrap"><i class="fa fa-fw fa-microphone" aria-hidden="true"></i> Voice Channels:</div>
+        <div class="col-5 text-nowrap"><strong><%= stats.voice %></strong></div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-5 text-nowrap"><i class="fa fa-fw fa-cogs" aria-hidden="true"></i> Discord.js Version:</div>
+        <div class="col-5 text-nowrap"><strong><%= stats.dVersion %></strong></div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-5 text-nowrap"><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Node.js Version:</div>
+        <div class="col-5 text-nowrap"><strong><%= stats.nVersion %></strong></div>
+      </div>
+  </div> -->
+  </div>
+  <% include ./blocks/footer %>

@@ -1,0 +1,18 @@
+Git Command Line Interface Instructions
+
+# Comitting from my local machine
+
+git status
+git add .
+git commit -m '<Message in Here>'
+git push https://gitlab.com/MrAugu/lutu-bot master
+
+
+# Getting Code to another machine
+
+git clone https://gitlab.com/MrAugu/lutu-bot
+
+
+# Updating Code from GitLab
+
+git pull

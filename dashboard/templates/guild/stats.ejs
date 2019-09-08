@@ -1,0 +1,81 @@
+<%- include('../blocks/header', {bot, user, path}) %>
+
+<div class="jumbotron">
+        <div class="media text-center">
+            <% if (guild.icon) { %>
+            <img class="d-flex mr-3 rounded-circle" src="<%= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` %>" style="width: 64px; height: 64px;" alt="guild.png">
+            <% } else { %>
+            <canvas style="background-color: #bdc9f5;" class="d-flex mr-3 rounded-circle" id="<%= guild.name.split(' ').join('').replace(`'`, ``) %>" width="64px" height="64px"></canvas>
+            <script>
+          function draw() {
+            const ctx = document.getElementById("<%= guild.name.split(' ').join('').replace(`'`, ``) %>").getContext('2d');
+            ctx.font = '30px Arial';
+            ctx.textAlign = "center";
+            ctx.fillStyle = "white";
+            ctx.fillText("<%= guild.name.split(' ').map(v => v[0]).join('') %>", 40, 50);
+          };
+            draw();
+            </script>
+            <% } %>
+            <div class="media-body">
+                <h5 class="mt-0"><%= guild.name %>
+                </h5> Currently viewing stats for <strong><%= guild.name %></strong>.
+            </div>
+        </div>
+    </div>
+
+    <%
+
+    const lvl = {
+      0: "None",
+      1: "Low",
+      2: "Medium",
+      3: "(╯°□°）╯︵ ┻━┻",
+      4: "┻━┻彡 ヽ(ಠ益ಠ)ノ彡┻━┻"
+    };
+
+    const regions = {
+        "brazil": "Brazil",
+        "eu-central": "Central Europe",
+        "hongkong": "Hong Kong",
+        "japan": "Japan",
+        "russia": "Russia",
+        "singapore": "Singapore",
+        "southafrica": "South Africa",
+        "sydney": "Sydney",
+        "us-central": "US Central",
+        "us-east": "US East",
+        "us-south": "US South",
+        "us-west": "US West",
+        "eu-west": "Western Europe"
+      };
+
+    %>
+    <div class="jumbotron text-center">
+        <h4><strong>Name</strong>: <%= name %></h4>
+        <hr>
+        <h4><strong>Member Count</strong>: <%= memberCount.toLocaleString() %></h4>
+        <hr>
+        <h4><strong>Human Count</strong>: <%= guild.members.filter(m => m.user.bot === false).size.toLocaleString() %></h4>
+        <hr>
+        <h4><strong>Bot Count</strong>: <%= guild.members.filter(m => m.user.bot === true).size.toLocaleString() %></h4>
+        <hr>
+        <h4><strong>Voice Channels</strong>: <%= voiceChannels %></h4>
+        <hr>
+        <h4><strong>Text Channels</strong>: <%= textChannels %></h4>
+        <hr>
+        <h4><strong>Owner</strong>: <%= owner.username %>#<%= owner.discriminator %> (ID: <%= owner.id %>)</h4>
+        <hr>
+        <h4><strong>Guild Name Acronym</strong>: <%= acronym %></h4>
+        <hr>
+        <h4><strong>Region</strong>: <%= regions[region] %></h4>
+        <hr>
+        <h4><strong>Verification Level</strong>: <%= `${verificationLevel} - ${lvl[verificationLevel]}` %></h4>
+        <hr>
+        <h4><strong>Bans</strong>: <%= totalBans %></h4>
+        <hr>
+        <h4><strong>Active Invites</strong>: <%= totalInvites %></h4>
+        
+    </div>
+
+<% include ../blocks/footer %>

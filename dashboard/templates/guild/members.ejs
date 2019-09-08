@@ -1,0 +1,42 @@
+<%- include('../blocks/header', {bot, user, path}) %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tag</th>
+      <th scope="col">Status</th>
+      <th scope="col">Roles</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%
+      const status = {
+        "online": "Online",
+        "idle": "Idle",
+        "dnd": "Do Not Disturb",
+        "offline": "Offline/Invisible"
+      };
+      var index = 0;
+      members.forEach(member => { 
+    %>
+
+    <%
+      var roles = member.roles.map(r => r.name);
+      const indx = roles.findIndex(r => r === "@everyone");
+      roles.splice(indx, 1);
+    %>
+    <tr>
+      <th scope="row"><%= index++ %></th>
+      <td><%= member.user.tag %></td>
+      <td><%=  status[member.user.presence.status] || member.user.presence.status %></td>
+      <td><%= member.roles.size === 1 ? "None" : roles.join(", ") %></td>
+    </tr>
+
+    <%
+      });
+    %>
+  </tbody>
+</table>
+<% include ../blocks/footer %>

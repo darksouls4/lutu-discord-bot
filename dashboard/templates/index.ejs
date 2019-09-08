@@ -1,0 +1,32 @@
+<%- include('blocks/header', {bot, user, path}) %>
+
+<br> <br> <br> <br>
+
+<script>
+  function wrapToDashboard() {
+    location.href = "/dashboard";
+  };
+
+  function wrapToInfo() {
+    location.href = "/info";
+    console.log("2");
+  };
+</script>
+
+<div class="text-center">
+    <a href="https://discordbots.org/bot/523552979664633858" >
+      <img src="https://discordbots.org/api/widget/status/523552979664633858.svg?noavatar=true" alt="Lutu" />
+    </a><a href="https://discordbots.org/bot/523552979664633858" >
+      <img src="https://discordbots.org/api/widget/servers/523552979664633858.svg?noavatar=true" alt="Lutu" />
+    </a><a href="https://discordbots.org/bot/523552979664633858" >
+      <img src="https://discordbots.org/api/widget/upvotes/523552979664633858.svg?noavatar=true" alt="Lutu" />
+    </a><a href="https://discordbots.org/bot/523552979664633858" >
+      <img src="https://discordbots.org/api/widget/lib/523552979664633858.svg?noavatar=true" alt="Lutu" />
+    </a><a href="https://discordbots.org/bot/523552979664633858" >
+      <img src="https://discordbots.org/api/widget/owner/523552979664633858.svg?noavatar=true" alt="Lutu" />
+    </a>
+    <br>
+  <h3>Discord server security brought to a new level.</h3>
+  <p>Lutu is the only moderation bot you need for your server.</p>
+  <button type="button" onclick="wrapToDashboard();" class="btn btn-outline-success btn-lg">Select Server</button>
+</div>

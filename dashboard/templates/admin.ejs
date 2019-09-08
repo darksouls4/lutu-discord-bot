@@ -1,0 +1,48 @@
+<%- include('blocks/header', {bot, user, path}) %>
+<h1 class="display-3" id="title">Server List:</h1>
+
+<div class="card-columns">
+  <% bot.guilds.forEach(guild => { 
+  %>
+  
+    <div class="card">
+      <% if (guild.icon) { %>
+        <img class="rounded mx-auto d-block card-img-top" src="<%= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128` %>" alt="">
+      <% } else { %>
+        <canvas style="background-color: #7289da" class="rounded mx-auto d-block card-img-top" id="<%= guild.name.split(' ').join('').replace(`'`, ``) %>"  width="100%" height="100%"></canvas>
+        <script>
+          function draw() {
+            const ctx = document.getElementById("<%= guild.name.split(' ').join('').replace(`'`, ``) %>").getContext('2d');
+            ctx.font = '30px Arial';
+            ctx.textAlign = "center";
+            ctx.fillStyle = "white";
+            ctx.fillText("<%= guild.name.split(' ').map(v => v[0]).join('') %>", 50, 55);
+          };
+          draw();
+        </script>
+      <% } %>
+      <div class="card-body">
+          <h5 class="card-title"><%= guild.name %></h5>
+          <% 
+          let href, text;
+          let enabled;
+          if(bot.guilds.get(guild.id)) {
+            href = `/dashboard/${guild.id}`;
+            text = "Edit";
+            enabled = true;
+          } else {
+            href = `https://discordapp.com/oauth2/authorize?client_id=${bot.appInfo.id}&scope=bot&guild_id=${guild.id}&response_type=code&redirect_uri=${encodeURIComponent(bot.config.dashboard.callbackURL)}`;
+            text = "Invite";
+            enabled = bot.appInfo.botPublic;
+          }
+          %>
+
+          <p class="card-text">Owner: <%= `${guild.owner.user.tag} (ID: ${guild.owner.id})` %><br><%= `Members: ${guild.memberCount.toLocaleString()}` %></p>
+          <a href="<%= href %>" role="button" class="btn btn-outline-secondary<% if(!enabled) { %> disabled<% } %>"><%= text %> <i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i></a>
+          <a href="/admin/<%= `${guild.id}` %>/leave" role="button" class="btn btn-outline-danger">Leave Guild <i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i></a>
+          <a href="/admin/<%= `${guild.id}` %>/warp" role="button" class="btn btn-outline-primary">Warp <i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i></a>
+        </div>
+    </div>
+  <% }); %>
+</div>
+  <% include ./blocks/footer %>

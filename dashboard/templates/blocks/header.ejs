@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Meta Charset, Viewport, Name -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="Lutu" />
+
+    <!-- Embedding -->
+    <meta property="og:title" content="Lutu Dashboard" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lutu.gq/" />
+    <meta property="og:description" content="Discord Security brought to next level." />
+    <meta property="og:image" content="<%= bot.user.displayAvatarURL({ size: 512, type: 'png' }) %>"/>
+    <meta property="og:site_name" content="Lutu Dashboard">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Font-Awesome, Boostrap, Icon Librarys -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js" integrity="sha256-zG8v+NWiZxmjNi+CvUYnZwKtHzFtdO8cAKUIdB8+U9I=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="/public/css/dashboard.css">
+    <!--<link rel="stylesheet" href="/public/css/dashboard.css" />-->
+
+    <!-- Website Tab Icon -->
+    <link rel='icon' href="<%= bot.user.displayAvatarURL({ size: 128, type: 'png' }) %>">
+
+    <!-- Title -->
+    <title>Lutu</title>
+
+    <!-- Google AdSense -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-7160194497484683",
+        enable_page_level_ads: true
+      });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135517296-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-135517296-1');
+    </script>
+
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="/">
+              <img src="<%= bot.user.displayAvatarURL({ size: 512, type: 'png' })%>" width="30" height="30" class="d-inline-block align-top rounded-circle" alt="lutu.svg"> Lutu</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item active"><a class="nav-link" href="/commands">Commands</a></li>
+              <li class="nav-item active"><a class="nav-link" href="/invite">Invite</a></li>
+              <li class="nav-item active"><a class="nav-link" href="/staff">Staff</a></li>
+              <li class="nav-item active"><a class="nav-link" href="/discord">Help</a></li>
+              <li class="nav-item active"><a class="nav-link" href="/terms">Terms of Service</a></li>
+              <li class="nav-item active"><a class="nav-link" href="/privacy">Privacy Policy</a></li>
+            <% if (user) { %>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= user.username %></a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <h5 class="dropdown-header" href="#"><i class="far fa-user"></i> <%= user.username %></h5>
+                    <a class="dropdown-item" href="/dashboard"><i class="fas fa-cog"></i></i> Dashboard</a>
+                    <a class="dropdown-item" href="/report"><i class="fas fa-flag"></i> Report User</a>
+                    <% if(bot.config.admins.includes(user.id) || bot.appInfo.owner.id === user.id) { %>
+                      <a class="dropdown-item" href="/admin"><i class="fas fa-shield-alt"></i> Admin</a>
+                    <% } %>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                  </div>
+                </li>
+            <% } else { %>
+              <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+            <% } %>
+        </ul>
+          </div>
+        </nav>
+    <div class="container">
+      <div class="nav-breadcrumb" style="width: 100%; margin-top: 20px; margin-bottom: 20px;">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <%
+            pathArray = path.split("/").slice(1);
+            pathArray = pathArray.map(p=> {
+              if (bot.guilds.has(p)) return bot.guilds.get(p).name;
+              return p.toProperCase();
+            });
+            let builtPath = "";
+            for(let i = 0; i < pathArray.length; i++) {
+              builtPath += "/"+path.split("/").slice(1)[i]; %>
+              <li class="breadcrumb-item<% if((i+1) === pathArray.length) { %> active">
+              <%= pathArray[i] %>
+            <% } else { %>">
+              <a href="<%= builtPath %>"><%= pathArray[i] %></a>
+            <% } %>
+          <% } %>
+          </li>
+        </ol>
+      </div>
+      <div class="alert alert-danger" role="alert">
+        <strong>NOTICE:</strong> We have added Terms of Service, check them out <a href="/terms">here</a>.
+      </div>
+
+      <div class="alert alert-danger" role="alert">
+        <strong>NOTICE:</strong> We have added a Privacy Policy, check it out <a href="/privacy">here</a>.
+      </div>

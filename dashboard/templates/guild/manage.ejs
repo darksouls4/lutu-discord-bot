@@ -1,0 +1,313 @@
+<%- include('../blocks/header', {bot, user, path}) %>
+<style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+</style>
+<div class="jumbotron">
+	<div class="media text-center">
+		<% if (guild.icon) { %>
+		<img class="d-flex mr-3 rounded-circle" src="<%= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` %>" style="width: 64px; height: 64px;" alt="guild.png">
+		<% } else { %>
+		<canvas style="background-color: #bdc9f5;" class="d-flex mr-3 rounded-circle" id="<%= guild.name.split(' ').join('').replace(`'`, ``) %>" width="64px" height="64px"></canvas>
+		<script>
+      function draw() {
+        const ctx = document.getElementById("<%= guild.name.split(' ').join('').replace(`'`, ``) %>").getContext('2d');
+        ctx.font = '30px Arial';
+        ctx.textAlign = "center";
+        ctx.fillStyle = "white";
+        ctx.fillText("<%= guild.name.split(' ').map(v => v[0]).join('') %>", 40, 50);
+      };
+        draw();
+		</script>
+		<% } %>
+		<div class="media-body">
+			<h5 class="mt-0"><%= guild.name %>
+			</h5> Currently editing settings for <%= guild.name %>.
+		</div>
+	</div>
+</div>
+
+<form method="post">
+	<div class="jumbotron">
+		<a href="/stats/<%= guild.id %>" class="btn btn-outline-secondary btn-block"><i class="fas fa-chart-bar"></i> Server Stats</a>
+		<a href="/members/<%= guild.id %>" class="btn btn-outline-secondary btn-block btn-block"><i class="fas fa-list"></i> Server Member List</a>
+		<button type="submit" class="btn btn-outline-danger btn-block"><i class="fas fa-save"></i> Save Settings</button>
+	</div>
+
+	<div class="jumbotron">
+		<h4>Basic Options</h4><br><br>
+		<div class="form-group">
+			<label for="exampleSelect1"><strong>Prefix:</strong></label>
+			<input type="text" style="width: 105px;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="prefix" value="<%= guild.sets.prefix %>">
+		</div>
+
+		<div class="form-group">
+			<p><strong>Moderator Role:</strong></p>
+			<select name="modrole" class="selectpicker" data-live-search="true">
+			<option data-tokens="none selected" value="">(none)</option>
+			<%
+				const rols = guild.roles;
+				rols.forEach(r => {
+			%>
+				<option data-tokens="<%= r.name %>" value="<%= r.id %>" <%= guild.sets.modRole === r.id ? "selected" : "" %>>@ <%= r.name %>
+			<%
+				});
+			%>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<p><strong>Admin Role:</strong></p>
+			<select name="adminrole" class="selectpicker" data-live-search="true">
+			<option data-tokens="none selected" value="">(none)</option>
+			<%
+				const rols2 = guild.roles;
+				rols2.forEach(r => {
+			%>
+				<option data-tokens="<%= r.name %>" value="<%= r.id %>" <%= guild.sets.adminRole === r.id ? "selected" : "" %>>@ <%= r.name %>
+			<%
+				});
+			%>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<p><strong>Join Role:</strong></p>
+			<select name="joinrole" class="selectpicker" data-live-search="true">
+			<option data-tokens="none selected" value="">(none)</option>
+			<%
+				const rols3 = guild.roles;
+				rols3.forEach(jr => {
+			%>
+				<option data-tokens="<%= jr.name %>" value="<%= jr.id %>" <%= guild.sets.joinrole === jr.id ? "selected" : "" %>>@ <%= jr.name %>
+			<%
+				});
+			%>
+			</select>
+		</div>
+	</div>
+
+  <div class="jumbotron">
+    <h4>Logging Settings:</h4><br><br>
+    <div class="form-group">
+				<p><strong>Moderation Log Channel:</strong></p>
+				<select name="mod-channel" class="selectpicker" data-live-search="true">
+				<option data-tokens="none selected" value="">(none)</option>
+				<%
+					const chens = guild.channels.filter(c => c.type === "text");
+					chens.forEach(c => {
+				%>
+					<option data-tokens="<%= c.name %>" value="<%= c.id %>" <%= guild.sets.logsChannel === c.id ? "selected" : "" %>># <%= c.name %>
+				<%
+					});
+				%>
+				</select>
+			</div>
+
+      <div class="form-group">
+  				<p><strong>Server Logs:</strong></p>
+  				<select name="serverLogs" class="selectpicker">
+  				<option value="off" <%= guild.sets.serverLogs === "off" ? "selected" : "" %>>Off</option>
+  					<option value="on"<%= guild.sets.serverLogs === "on" ? "selected" : "" %>>On</option>
+  				</select>
+  			</div>
+
+        <div class="form-group">
+            <p><strong>Chat Logs:</strong></p>
+            <select name="chatLogs" class="selectpicker">
+            <option value="off" <%= guild.sets.chatLogs === "off" ? "selected" : "" %>>Off</option>
+              <option value="on"<%= guild.sets.chatLogs === "on" ? "selected" : "" %>>On</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+              <p><strong>Moderation Logs:</strong></p>
+              <select name="moderationLogs" class="selectpicker">
+              <option value="off" <%= guild.sets.moderationLogs === "off" ? "selected" : "" %>>Off</option>
+                <option value="on"<%= guild.sets.moderationLogs === "on" ? "selected" : "" %>>On</option>
+              </select>
+            </div>
+  </div>
+
+	<div class="jumbotron">
+		<h4>Checkpoint Settings</h4><br><br>
+		<div class="form-group">
+			<label for="exampleSelect1"><strong>Checkpoint Status:</strong></label>
+			<select name="checkpoint" style="width:105px;" class="form-control" id="exampleSelect1">
+				<option value="on" <%= guild.sets.checkpoint === "on" ? "selected" : "" %>>On</option>
+				<option value="off" <%= guild.sets.checkpoint === "off" ? "selected" : "" %>>Off</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+				<label for="exampleSelect1"><strong>Checkpoint Mode:</strong></label>
+				<select name="checkpointmode" style="width:105px;" class="form-control" id="exampleSelect1">
+					<option value="N/A" <%= guild.sets.checkpoint_mode === "N/A" ? "selected" : "" %>>Disabled</option>
+					<option value="warn" <%= guild.sets.checkpoint_mode === "warn" ? "selected" : "" %>>Warn</option>
+					<option value="ban" <%= guild.sets.checkpoint_mode === "ban" ? "selected" : "" %>>Ban</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<p><strong>Checkpoint Log Channel:</strong></p>
+				<select name="checkpointlog" class="selectpicker" data-live-search="true" >
+				<option data-tokens="none selected" value="">(none)</option>
+				<%
+					const checkLog = guild.channels.filter(c => c.type === "text");
+					checkLog.forEach(c => {
+				%>
+					<option data-tokens="<%= c.name %>" value="<%= c.id %>" <%= guild.sets.checkpoint_logChannel === c.id ? "selected" : "" %>># <%= c.name %>
+				<%
+					});
+				%>
+				</select>
+			</div>
+	</div>
+
+	<div class="jumbotron">
+		<h4>Automated Moderator Settings</h4><br><br>
+		<div class="form-group">
+			<label for="exampleSelect1"><strong>Spam Filter:</strong></label>
+			<select name="anti-spam" style="width:105px;" class="form-control" id="exampleSelect1">
+			  <option value="on" <%= guild.sets.antiSpam === "on" ? "selected" : "" %>>On</option>
+				<option value="off" <%= guild.sets.antiSpam === "off" ? "selected" : "" %>>Off</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleSelect1"><strong>Links Filter:</strong></label>
+			<select name="anti-link" style="width:105px;" class="form-control" id="exampleSelect1">
+				<option value="on" <%= guild.sets.antiLinks === "on" ? "selected" : "" %>>On</option>
+				<option value="off" <%= guild.sets.antiLinks === "off" ? "selected" : "" %>>Off</option>
+		  </select>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleSelect1"><strong>Invites Filter:</strong></label>
+			<select name="anti-discord" style="width:105px;" class="form-control" id="exampleSelect1">
+				<option value="on" <%= guild.sets.antiInvite === "on" ? "selected" : "" %>>On</option>
+				<option value="off" <%= guild.sets.antiInvite === "off" ? "selected" : "" %>>Off</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleSelect1"><strong>Fail @everyone Filter:</strong></label>
+			<select name="anti-everyone" style="width:105px;" class="form-control" id="exampleSelect1">
+				<option value="on" <%= guild.sets.antiEveryone === "on" ? "selected" : "" %>>On</option>
+				<option value="off" <%= guild.sets.antiEveryone === "off" ? "selected" : "" %>>Off</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleSelect1"><strong>Bad Word Filter:</strong></label>
+			<select name="anti-bad" style="width:105px;" class="form-control" id="exampleSelect1">
+				<option value="on" <%= guild.sets.antiBad === "on" ? "selected" : "" %>>On</option>
+				<option value="off" <%= guild.sets.antiBad === "off" ? "selected" : "" %>>Off</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleSelect1"><strong>NSFW Filter:</strong></label>
+			<select name="anti-nsfw" style="width:105px;" class="form-control" id="exampleSelect1">
+				<option value="on" <%= guild.sets.nsfwDetection === "on" ? "selected" : "" %>>On</option>
+				<option value="off" <%= guild.sets.nsfwDetection === "off" ? "selected" : "" %>>Off</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleSelect1"><strong>Max Mentions:</strong></label><br>
+			<input style="width: 140px!important;" class="col-2 col-form-label" max="100" type="number" name="max-mentions" value="<%= guild.sets.maxMentions %>">
+		</div>
+
+		<div class="form-group">
+			<label for="exampleSelect1"><strong>Max Lines:</strong></label><br>
+			<input style="width: 140px!important;" class="col-2 col-form-label" max="400" type="number" name="max-lines" value="<%= guild.sets.maxLines %>">
+		</div>
+
+		<div class="form-group">
+			<p><strong>Ignored Channels:</strong></p>
+			<select name="ignored-channels" class="selectpicker" data-live-search="true" multiple>
+			<%
+        const channels = guild.channels.filter(c => c.type === "text");
+        channels.forEach(c => {
+      %>
+				<option data-tokens="<%= c.name %>" value="<%= c.id %>" <%= guild.sets.ignoredChannels.includes(c.id) ? "selected" : "" %>># <%= c.name %>
+			<%
+        });
+			%>
+			</select>
+		</div>
+
+    <div class="form-group">
+		  <p><strong>Ignored Roles:</strong></p>
+			<select name="ignored-roles" class="selectpicker" data-live-search="true" multiple>
+			<%
+        const roles = guild.roles;
+        roles.forEach(r => {
+			%>
+			  <option data-tokens="<%= r.name %>" value="<%= r.id %>" <%= guild.sets.ignoredRoles.includes(r.id) ? "selected" : "" %>>@ <%= r.name %>
+			<%
+        });
+      %>
+    </div>
+	</div>
+</form>
+
+<% include ../blocks/footer %>

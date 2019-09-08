@@ -1,0 +1,74 @@
+<%- include('blocks/header', {bot, user, path}) %>
+
+<style>
+  .jumbotron {
+    -webkit-animation: mover 1.5s infinite alternate;
+    animation: mover 1.5s infinite alternate;
+    -webkit-animation-timing-function: ease-in-out;
+   	animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+  	}
+
+  @-webkit-keyframes mover {
+  	0% { 
+  		transform: translateY(0); 
+  	}
+
+  	100% { 
+  	  transform: translateY(-8px); 
+  	}
+  }
+
+  @keyframes mover {
+    0% { 
+  	  transform: translateY(0); 
+  	}
+
+    100% { 
+  	  transform: translateY(-8px); 
+  	}
+  }
+</style>
+
+<div class="jumbotron">
+	<div class="media text-center">
+		<img class="d-flex mr-3 rounded-circle" src="<%= mraugu.image %>" style="width: 64px; height: 64px;" alt="guild.png">
+		<div class="media-body">
+			<h5 class="mt-0">MrAugu
+			</h5>A 13 year old boy, loves coding.<br><br> <strong>Founder, Developer, CEO</strong>
+		</div>
+	</div>
+</div>
+
+<div class="jumbotron">
+	<div class="media text-center">
+		<img class="d-flex mr-3 rounded-circle" src="<%= datacell.image %>" style="width: 64px; height: 64px;" alt="guild.png">
+		<div class="media-body">
+			<h5 class="mt-0">Christopher Khawand
+			</h5>A 000webhost moderator, web developer, PHP Guru and a great athlete.<br><br> <strong>Developer, Administrator, Hosting Sponsor, Linguist</strong>
+		</div>
+	</div>
+</div>
+
+<div class="jumbotron">
+	<div class="media text-center">
+		<img class="d-flex mr-3 rounded-circle" src="<%= zaydme.image %>" style="width: 64px; height: 64px;" alt="guild.png">
+		<div class="media-body">
+			<h5 class="mt-0">Zayd Boudekkara
+			</h5>A 19 year old boy, medecine student, loves coding more than medecine.. kinda.<br><br> <strong>Developer, Administrator</strong>
+		</div>
+	</div>
+</div>
+
+<div class="jumbotron">
+	<div class="media text-center">
+		<img class="d-flex mr-3 rounded-circle" src="<%= skarff.image %>" style="width: 64px; height: 64px;" alt="guild.png">
+		<div class="media-body">
+			<h5 class="mt-0">skarff
+			</h5>I couldn't think of a bio.<br><br><strong>Developer, Administrator, Linguist</strong>
+		</div>
+	</div>
+</div>
+
+<% include ./blocks/footer %>

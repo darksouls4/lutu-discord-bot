@@ -1,0 +1,37 @@
+.roleBox {
+  border-radius: 3px;
+  padding: 0px 3px;
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+.status {
+  box-sizing: border-box;
+  border-width: 2px;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  float: left;
+  vertical-align: middle;
+  margin: 5px;
+}
+
+.online {
+  border: 3.3px solid #69c49a;
+  background-color: #42b581;
+}
+
+.idle {
+  border: 3.3px solid #fbb848;
+  background-color: #faa61a;
+}
+
+.dnd {
+  border: 3.3px solid #f36c6c;
+  background-color: #f04747;
+}
+
+.offline {
+  border: 3.3px solid #9099a4;
+  background-color: #747f8d;
+}

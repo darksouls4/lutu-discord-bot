@@ -1,0 +1,47 @@
+<%- include('blocks/header', {bot, user, path}) %>
+
+<% if (error) { %>
+<div class="alert alert-danger" role="alert">
+<%= error %>
+</div>
+<% } %>
+
+<% if (success) { %>
+<div class="alert alert-success" role="alert">
+<%= success %>
+</div>
+<% } %>
+
+<div class="jumbotron">
+        <div class="container">
+                <h2>Report User</h2>
+                <form method="post" class="form-horizontal">
+                        <div class="form-group">
+                                <label for="exampleSelect1"><strong>User ID:</strong></label>
+                                <input type="text" style="width: 220px;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="id" required>
+                            </div>
+
+                        <div class="form-group">
+                                <p><strong>Reason:</strong></p>
+                                <select name="reason" class="selectpicker" data-live-search="true" required>
+                                        <option value="1">Direct Message Advertising</option>
+                                        <option value="2">Terms of Service Violation</option>
+                                        <option value="3">Problematic Bot</option>
+                                        <option value="4">Doxxing</option>
+                                        <option value="5">Raids and Nuking</option>
+                                        <option value="6">Underage in NSFW</option>
+                                        <option value="7">Excessive Harassament</option>
+                                </select>
+                            </div>
+                   
+                            <div class="form-group">
+                                    <label for="exampleSelect2"><strong>Proof Links:</strong></label>
+                                    <input type="text" style="width: 220px;" class="form-control mb-2 mr-sm-2 mb-sm-0" name="proofs" placeholder="Separated by a comma ','." required>
+                                </div>
+
+                            <button type="submit" class="btn btn-outline-primary">Report User</button>
+                </form>
+              </div>
+</div>
+
+<% include ./blocks/footer %>
