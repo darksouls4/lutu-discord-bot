@@ -237,12 +237,6 @@ client.on("warn", info => client.logger.warn(info));
 
 module.exports.Client = client;
 
-process.on("uncaughtException", (err) => {
-  const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
-  console.error("Uncaught Exception: ", errorMsg);
-  process.exit(1);
-});
-
 Object.defineProperty(String.prototype, "toProperCase", {
   value: function () {
     return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
