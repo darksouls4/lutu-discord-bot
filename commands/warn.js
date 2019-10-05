@@ -28,8 +28,8 @@ class Warn extends Command {
 
   async run (message, args, level, reply) { // eslint-disable-line no-unused-vars
     const user = message.mentions.members.first() || message.guild.members.get(args[0]) || message.guild.members.get(args[1]);
-    if (!user) return reply("<a:aRedTick:556121032507916290> You haven't specified a user!");
-    // if (user.id === message.author.id) return reply("<a:aRedTick:556121032507916290> I can not allow self-harm. I mean why would you like to warn yourself..");
+    if (!user) return reply("You haven't specified a user!");
+    if (user.id === message.author.id) return reply("I can not allow self-harm. I mean why would you like to warn yourself..");
     let warnings = parseInt(args[0]);
     if (isNaN(warnings)) warnings = 1;
     const reason = args.slice(2).join(" ") || "[none specified]";
@@ -51,7 +51,7 @@ class Warn extends Command {
           Logger.send().then(t => Logger.kill());
         }
         await warnReceiver.emit(this.client, user, message.member, message.guild);
-        reply(`<a:aGreenTick:556121203136528388> Gave \`${warnings}\` infractions to **${user.user.tag}**.`);
+        reply(`Gave \`${warnings}\` infractions to **${user.user.tag}**.`);
         return undefined;
       }
       u.infractions = u.infractions + warnings;
@@ -61,7 +61,7 @@ class Warn extends Command {
         Logger.send().then(t => Logger.kill());
       }
       await warnReceiver.emit(this.client, user, message.member, message.guild);
-      reply(`<a:aGreenTick:556121203136528388> Gave \`${warnings}\` infractions to **${user.user.tag}**.`);
+      reply(`Gave \`${warnings}\` infractions to **${user.user.tag}**.`);
     });
   }
 }

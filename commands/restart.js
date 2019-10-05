@@ -18,7 +18,7 @@ class Restart extends Command {
 
   async run (message, args, level) { // eslint-disable-line no-unused-vars
     try {
-      await message.react("556121203136528388");
+      await message.react("✅");
 
       this.client.commands.forEach(async cmd => {
         await this.client.unloadCommand(cmd);

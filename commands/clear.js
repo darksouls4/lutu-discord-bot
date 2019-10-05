@@ -27,10 +27,10 @@ class Clear extends Command {
     } else {
       var reason = args.slice(1).join(" ") || "Not specified.";
     }
-    if (!amount) return reply("<a:aRedTick:556121032507916290> Please specify an amount of messages to delete.");
-    if (amount > 99) return reply("<a:aRedTick:556121032507916290> The number must be smaller than 100.");
-    if (amount < 2) return reply("<a:aRedTick:556121032507916290> The number must be bigger than 1.");
-    if (!amount && !user) return reply("<a:aRedTick:556121032507916290> Please mention a user or specify an amount of messages to delete!");
+    if (!amount) return reply("Please specify an amount of messages to delete.");
+    if (amount > 99) return reply("The number must be smaller than 100.");
+    if (amount < 2) return reply("The number must be bigger than 1.");
+    if (!amount && !user) return reply("Please mention a user or specify an amount of messages to delete!");
     amount = amount + 1;
     message.channel.messages.fetch({ limit: amount }).then(async (messages) => {
       if (user) {
@@ -39,25 +39,25 @@ class Clear extends Command {
         try {
           await message.channel.bulkDelete(messages);
         } catch (e) {
-          return reply(`<a:aRedTick:556121032507916290> Couldn't delete messages because ${e}.`);
+          return reply(`Couldn't delete messages because ${e}.`);
         }
         if (message.guild.settings.moderationLogs.toLowerCase() === "on") {
           const Logger = new logHandler({ client: this.client, case: "clearMessages", guild: message.guild.id, moderator: message.author, reason: reason, channel: message.channel, amount: amount, member: user  });
           Logger.send().then(t => Logger.kill());
         }
-        return reply(`<a:aGreenTick:556121203136528388> Successfully deleted **${messages.length}** of **${user.user.tag}**'s messages!`);
+        return reply(`Successfully deleted **${messages.length}** of **${user.user.tag}**'s messages!`);
       }
 
       try {
         await message.channel.bulkDelete(amount);
       } catch (e) {
-        return reply(`<a:aRedTick:556121032507916290> Couldn't delete messages because ${e}.`);
+        return reply(`Couldn't delete messages because ${e}.`);
       }
       if (message.guild.settings.moderationLogs.toLowerCase() === "on") {
         const Logger = new logHandler({ client: this.client, case: "clearMessages", guild: message.guild.id, moderator: message.author, reason: reason, channel: message.channel, amount: amount  });
         Logger.send().then(t => Logger.kill());
       }
-      reply(`<a:aGreenTick:556121203136528388> Successfully deleted **${amount}** messsages!`);
+      reply(`Successfully deleted **${amount}** messsages!`);
     });
   }
 }

@@ -5,10 +5,6 @@ const databaseUrl = config.dbUrl;
 const Settings = require("../models/settings.js");
 const Command = require("../base/Command.js");
 
-mongoose.connect(databaseUrl, {
-  useNewUrlParser: true
-});
-
 class Setting extends Command {
   constructor (client) {
     super(client, {

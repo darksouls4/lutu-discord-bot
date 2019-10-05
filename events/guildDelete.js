@@ -1,5 +1,4 @@
 const Discord = require("discord.js"); // eslint-disable-line no-unused-vars
-const request = require("request");
 
 module.exports = class {
   constructor (client) {
@@ -7,11 +6,6 @@ module.exports = class {
   }
 
   async run (guild) {
-    const api = `https://lutu.gq/api/postStats.php?guild=${this.client.guilds.size}&members=${this.client.users.size}&channels=${this.client.channels.size}`;
-    request(api, function (error, response, body) { // eslint-disable-line no-unused-vars
-      console.log("Stats posted to API.");
-    });
-
     const leaveEmbed = new Discord.MessageEmbed()
       .setTitle("Left a Server!")
       .setThumbnail(guild.iconURL)
@@ -26,8 +20,8 @@ module.exports = class {
       `)
       .setColor("RED")
       .setTimestamp();
-    
-    this.client.channels.get("529750069877014548").send(leaveEmbed);
+
+    this.client.channels.get(this.client.config.guildLogChannel).send(leaveEmbed);
     await this.client.user.setActivity(`${this.client.guilds.size} Servers | ${this.client.config.prefix}help`, { type: "WATCHING" });
   }
 };

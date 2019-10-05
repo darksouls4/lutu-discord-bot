@@ -18,18 +18,18 @@ class Track extends Command {
     });
   }
 
-  async run (message,args, level, reply) { 
+  async run (message,args, level, reply) {
 
-		const invitecode = args.slice(0).join(" ");
- 
-      const idunno = message.member.guild.fetchInvites().then(i=> { 
+		const invitecode = args[0];
+
+    const idunno = message.member.guild.fetchInvites().then(i=> {
 	  const codeexist = i.get(invitecode)
 	  if(!codeexist) return message.channel.send("This invite code was not found.");
 	  const inviteinviter = i.get(invitecode).inviter
 	  const inviteuses = i.get(invitecode).uses
 	  const invitecreated = (i.get(invitecode).createdAt.getDate() + 1) + '/' + (i.get(invitecode).createdAt.getMonth() + 1) + '/' + i.get(invitecode).createdAt.getFullYear()
 	  var willexpite = 'Never'
-	  if(i.get(invitecode).expiresAt){ 
+	  if(i.get(invitecode).expiresAt){
 	  willexpite =  (i.get(invitecode).expiresAt.getDate() + 1) + '/' + (i.get(invitecode).expiresAt.getMonth() + 1) + '/' + i.get(invitecode).expiresAt.getFullYear()
 	  }
      const settingEmbed = new Discord.MessageEmbed()

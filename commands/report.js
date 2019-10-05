@@ -47,7 +47,7 @@ class Report extends Command {
     const displayEmbed = new Discord.MessageEmbed()
       .setTitle("User Recognized")
       .addField("[User]:", `▫ Username: ${reportedUser.username}\n▫ Tag: ${reportedUser.tag}\n▫ ID: ${reportedUser.id}\n\nDo you want to report this user? (\`yes\`/\`no\`)`)
-      .setThumbnail(reportedUser.displayAvatarURL)
+      .setThumbnail(reportedUser.displayAvatarURL())
       .setColor("#36393e")
       .setTimestamp();
 
@@ -78,9 +78,9 @@ class Report extends Command {
 
     const rawProofs = await this.client.awaitReply(message, "Please enter your proof image links separrated by a comma. (`,`)", 120000);
     if (rawProofs === false) return reply("Prompt timed out.");
-    
+
     const proofs = rawProofs.split(",");
-    
+
     for (const proof of proofs) {
       if (!validUrl.isUri(proof)) {
         const proofIndex = proofs.findIndex(item => item === proof);
@@ -114,7 +114,7 @@ class Report extends Command {
       .setColor("#36393e")
       .setTimestamp();
 
-    this.client.channels.get("527529283447554058").send(reportEmbed);
+    this.client.channels.get(this.client.config.newReportEmbed).send(reportEmbed);
     reply(`Report with ID **${complaintID}** has been saved.`);
   }
 }

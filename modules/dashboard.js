@@ -93,14 +93,14 @@ module.exports = (client) => {
   app.get("/privacy", (req, res) => renderTemplate(res, req, "privacy.ejs"));
 
   app.get("/discord", (req, res) => {
-    res.redirect("https://discord.gg/WkDuC5e");
+    res.redirect("https://discord.gg/?");
   });
 
   app.get("/sitemap.xml", (req, res) => {
     res.header('Content-Type', "text/xml");
     renderTemplate(res, req, "sitemap.ejs");
   });
-  
+
   app.get("/invite", (req, res) => {
     res.redirect("https://discordapp.com/oauth2/authorize?client_id=523552979664633858&permissions=8&scope=bot");
   });
@@ -173,15 +173,6 @@ module.exports = (client) => {
   app.get("/dashboard", checkAuth, (req, res) => {
     const perms = Discord.Permissions;
     renderTemplate(res, req, "dashboard.ejs", {perms});
-  });
-
-  app.get("/staff", (req, res) => {
-    renderTemplate(res, req, "staff.ejs", {
-      "mraugu": { "image": client.users.get("414764511489294347").displayAvatarURL() },
-      "datacell": { "image": client.users.get("235660286718246912").displayAvatarURL() },
-      "zaydme": { "image": client.users.get("538855659714641960").displayAvatarURL() },
-      "skarff": { "image": client.users.get("270252850121146369").displayAvatarURL() }
-    });
   });
 
   app.get("/admin", checkAuth, (req, res) => {
@@ -299,10 +290,10 @@ module.exports = (client) => {
     const reportEmbed = new Discord.MessageEmbed()
       .setTitle("New Report")
       .addField("[User]:", `▫ Username: ${usr.username}\n▫ Tag: ${usr.username}#${usr.discriminator}\n▫ ID: ${usr.id}`)
-      .addField("[Complaint]:", `▫ Complaint Author: ${req.user.username}#${req.user.discriminator}\n▫ Complaint Author ID: ${req.user.id}\n▫ Complaint Reason: ${reason}\n▫ Complaint Proofs: ${proofs.join(", ")}`)
+      .addField("[Complaint]:", `▫ Complaint ID: ${complaintID}\n▫ Complaint Author: ${req.user.username}#${req.user.discriminator}\n▫ Complaint Author ID: ${req.user.id}\n▫ Complaint Reason: ${reason}\n▫ Complaint Proofs: ${proofs.join(", ")}`)
       .setColor("#36393e")
       .setTimestamp();
-    client.channels.get("527529283447554058").send(reportEmbed);
+    client.channels.get(client.config.newReportEmbed).send(reportEmbed);
 
 
     renderTemplate(res, req, "report.ejs", { success: "User has been reported.", error: null });

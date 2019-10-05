@@ -16,17 +16,17 @@ class Reload extends Command {
     });
   }
 
-  async run (message, args, level, reply) { // eslint-disable-line no-unused-vars  
+  async run (message, args, level, reply) { // eslint-disable-line no-unused-vars
     const commands = this.client.commands.get(args[0]) || this.client.commands.get(this.client.aliases.get(args[0]));
-    if (!commands) return reply(`<a:aRedTick:556121032507916290> The command \`${args[0]}\` does not exist, nor is an alias.`);
+    if (!commands) return reply(`The command \`${args[0]}\` does not exist, nor is an alias.`);
 
     let response = await this.client.unloadCommand(commands.conf.location, commands.help.name);
-    if (response) return reply(`<a:aRedTick:556121032507916290> Error Unloading The Command: ${response}`);
+    if (response) return reply(`Error Unloading The Command: ${response}`);
 
     response = this.client.loadCommand(commands.conf.location, commands.help.name);
-    if (response) return reply(`<a:aRedTick:556121032507916290> Error Loading The Command: ${response}`);
+    if (response) return reply(`Error Loading The Command: ${response}`);
 
-    reply(`<a:aGreenTick:556121203136528388> \`${commands.help.name}\` has been reloaded.`);
+    reply(`\`${commands.help.name}\` has been reloaded.`);
   }
 }
 

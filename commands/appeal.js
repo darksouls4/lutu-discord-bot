@@ -6,11 +6,7 @@ const bans = require("../models/bans.js");
 const validUrl = require("valid-url");
 const Command = require("../base/Command.js");
 
-mongoose.connect(databaseUrl, {
-  useNewUrlParser: true
-});
-
-class Report extends Command {
+class Appeal extends Command {
   constructor (client) {
     super(client, {
       name: "appeal",
@@ -31,7 +27,7 @@ class Report extends Command {
       reportedID: message.author.id
     }, async (err, r) => {
       if (err) this.client.logger.log(err, "error");
-      if (!r) return reply("<a:aRedTick:556121032507916290> Looks like you are not on my ban list.");
+      if (!r) return reply("Looks like you are not on my ban list.");
 
       const q = await this.client.awaitReply(message, `Do you want to appeal case **${r.caseID}** for \`${r.caseReason}\`? (\`yes\`/\`no\`)`);
       if (q === false) return reply("Prompt timed out!");
@@ -54,7 +50,7 @@ class Report extends Command {
         } else if (t.length === 3) {
           links = `1) ${l1}\n2) ${l2}\n3) ${l3}\n4) ${l4}`;
         } else {
-          links = "<a:aRedTick:556121032507916290> No Proof Specified!";
+          links = "No Proof Specified!";
         }
 
         const previewEmbed = new Discord.MessageEmbed()
@@ -69,16 +65,15 @@ class Report extends Command {
 
         await reply("This is a preview of the appeal. Do you want to submit it? (`yes`/`no`)");
         const conf = await this.client.awaitReply(message, previewEmbed);
-        if (conf === false) return reply("<a:aRedTick:556121032507916290> Prompt timed out.");
+        if (conf === false) return reply("Prompt timed out.");
 
         if (conf.toLowerCase() === "yes") {
-          await this.client.channels.get().send(previewEmbed);
-          await this.client.channels.get().send(`📮 | **${message.author.tag}** appealed case ID **${r.caseID}**`);
+          await this.client.channels.get(this.client.config.appealEmbedChannel).send(previewEmbed);
         } else {
-          return reply("<a:aRedTick:556121032507916290> Aborted!");
+          return reply("Aborted!");
         }
       }
     });
   }
 }
-module.exports = Report;
+module.exports = Appeal;

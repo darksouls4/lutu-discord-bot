@@ -19,7 +19,7 @@ class Roles extends Command {
 
   async run(message, level) { //eslint-disable-line no-unused-vars
     const roles = message.guild.roles.map(r => `ID : ${r.id} - ${r.name}`).join('\n');
-    message.channel.send(`**[list of all the roles]** :\n\`\`\`${roles}\`\`\``);
+    message.channel.send(`**[List of all the roles]** :\n\`\`\`${roles}\`\`\``);
   }
 }
 

@@ -27,22 +27,22 @@ class ignoredUsers extends Command {
 
       if (option === "add") {
         const user = message.mentions.users.first() || this.client.users.get(args[1]);
-        if (!user) return reply("<a:aRedTick:556121032507916290> You must specify a user to add.");
+        if (!user) return reply("You must specify a user to add.");
         settings.ignoredUsers.push(user.id);
         await settings.save().catch(e => this.client.logger.log(e, "error"));
-        return reply(`<a:aGreenTick:556121203136528388> Added ${user} to automod ignored users.`);
+        return reply(`Added ${user} to automod ignored users.`);
       } else if (option === "remove") {
         const user = message.mentions.users.first() || this.client.users.get(args[1]) || args[1];
-        if (!user) return reply("<a:aRedTick:556121032507916290> You must specify a user to remove.");
+        if (!user) return reply("You must specify a user to remove.");
 
         const index = settings.ignoredUsers.findIndex(i => i === user.id);
-        if (index < 0) return reply("<a:aRedTick:556121032507916290> User not found on ignored user list.");
-        
+        if (index < 0) return reply("User not found on ignored user list.");
+
         settings.ignoredUsers.splice(index, 1);
         await settings.save().catch(e => this.client.logger.log(e, "error"));
-        return reply("<a:aGreenTick:556121203136528388> User has been removed from the ignored list.");
+        return reply("User has been removed from the ignored list.");
       } else {
-        return reply("<a:aRedTick:556121032507916290> Valid options are `add` or `remove`.");
+        return reply("Valid options are `add` or `remove`.");
       }
     });
   }

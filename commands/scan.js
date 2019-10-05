@@ -5,10 +5,6 @@ const databaseUrl = config.dbUrl;
 const BanList = require("../models/bans.js");
 const Command = require("../base/Command.js");
 
-mongoose.connect(databaseUrl, {
-  useNewUrlParser: true
-});
-
 class Scan extends Command {
   constructor (client) {
     super(client, {
@@ -27,8 +23,8 @@ class Scan extends Command {
 
   async run (message, args, level, reply) { // eslint-disable-line no-unused-vars
     const mode = args[0].toLowerCase(); // eslint-disable-line prefer-const
-    if (!mode === "warn" && !mode === "ban") return reply("<a:aRedTick:556121032507916290> Mode must be either warn (sends an embed with the blacklist reason if on the ban list) or ban (bans suspicious members and sends an embed with the blacklst reason if on the ban list)");
-    const mssg = await reply("<a:pending:527838556153053204> Scanning all of the members . This might take a while depending on the size of your server. Estimated time: **" + (message.guild.memberCount * 70 / 1000) + "** seconds.");
+    if (!mode === "warn" && !mode === "ban") return reply("Mode must be either warn (sends an embed with the blacklist reason if on the ban list) or ban (bans suspicious members and sends an embed with the blacklst reason if on the ban list)");
+    const mssg = await reply("Scanning all of the members . This might take a while depending on the size of your server. Estimated time: **" + (message.guild.memberCount * 70 / 1000) + "** seconds.");
     if (mode === "warn") {
       const arr = [];
       for (const member of message.guild.members) {
@@ -52,7 +48,7 @@ class Scan extends Command {
         });
       }
       mssg.delete();
-      return reply(`<a:aGreenTick:556121203136528388> Sucessfully scanned **${message.guild.memberCount}** members and **${arr.length}** members on the ban list have been detected.`);
+      return reply(`Sucessfully scanned **${message.guild.memberCount}** members and **${arr.length}** members on the ban list have been detected.`);
     } else if (mode === "ban") {
       const arr = [];
       for (const member of message.guild.members) {
@@ -77,9 +73,9 @@ class Scan extends Command {
         });
       }
 
-      return reply(`<a:aGreenTick:556121203136528388> Sucessfully scanned **${message.guild.memberCount}** members and **${arr.length}** members have been banned.`);
+      return reply(`Sucessfully scanned **${message.guild.memberCount}** members and **${arr.length}** members have been banned.`);
     } else {
-      return reply("<a:aRedTick:556121032507916290> Mode must be either warn (sends an embed with the blacklist reason if on the ban list) or ban (bans suspicious members and sends an embed with the blacklst reason if on the ban list).");
+      return reply("Mode must be either warn (sends an embed with the blacklist reason if on the ban list) or ban (bans suspicious members and sends an embed with the blacklst reason if on the ban list).");
     }
   }
 }

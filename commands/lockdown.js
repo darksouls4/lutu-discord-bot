@@ -54,10 +54,10 @@ class Lockdow extends Command {
             reply("I don't have permissions to geenrate a secured channel.");
           }
 
-          return reply("<a:aGreenTick:556121203136528388> This server is now under lockdown. All new messages will be deleted. Use `unlockdown [reason]` to unlock it.");
+          return reply("This server is now under lockdown. All new messages will be deleted. Use `unlockdown [reason]` to unlock it.");
         }
 
-        if (g.lockdownMode === "on") return reply("<a:aRedTick:556121032507916290> This server is already under lockdown. Use `unlockdown [reason]` to unlock it.");
+        if (g.lockdownMode === "on") return reply("This server is already under lockdown. Use `unlockdown [reason]` to unlock it.");
 
         g.lockdownMode = "on";
         await g.save().catch(e => this.client.logger.log(e, "error"));
@@ -69,13 +69,13 @@ class Lockdow extends Command {
             VIEW_CHANNEL: false
           });
         } catch (e) {
-          reply("<a:aRedTick:556121032507916290> I don't have permissions to geenrate a secured channel.");
+          reply("I don't have permissions to geenrate a secured channel.");
         }
         if (message.guild.settings.moderationLogs.toLowerCase() === "on") {
           const Logger = new logHandler({ client: this.client, case: "lockdownOn", guild: message.guild.id, moderator: message.author, reason: reason });
           Logger.send().then(t => Logger.kill());
         }
-        reply("<a:aGreenTick:556121203136528388> This server is now under lockdown. All new messages will be deleted. Use `unlockdown [reason]` to unlock it.");
+        reply("This server is now under lockdown. All new messages will be deleted. Use `unlockdown [reason]` to unlock it.");
       });
     } else if (mode === "off") {
       Lockdown.findOne({
@@ -97,12 +97,12 @@ class Lockdow extends Command {
               await safeChannel.delete();
             }
           } catch (e) {
-            reply("<a:aRedTick:556121032507916290> Snap, failed to delete 'safe' channel. Probably missing permissions.");
+            reply("Snap, failed to delete 'safe' channel. Probably missing permissions.");
           }
-          return reply("<a:aGreenTick:556121203136528388> Lockdown mode has been disabled. Messages will no longer be deleted. Use `lockdown [reason]` to lock the server again.");
+          return reply("Lockdown mode has been disabled. Messages will no longer be deleted. Use `lockdown [reason]` to lock the server again.");
         }
 
-        if (g.lockdownMode === "off") return reply("<a:aRedTick:556121032507916290> Server is not under lockdown. Use `lockdown [reason]` to lock it.");
+        if (g.lockdownMode === "off") return reply("Server is not under lockdown. Use `lockdown [reason]` to lock it.");
 
         g.lockdownMode = "off";
         await g.save().catch(e => this.client.logger.log(e, "error"));
@@ -119,7 +119,7 @@ class Lockdow extends Command {
           const Logger = new logHandler({ client: this.client, case: "lockdownOff", guild: message.guild.id, moderator: message.author, reason: reason });
           Logger.send().then(t => Logger.kill());
         }
-        reply("<a:aGreenTick:556121203136528388> Lockdown mode has been disabled. Messages will no longer be deleted. Use `lockdown [reason]` to lock the server again.");
+        reply("Lockdown mode has been disabled. Messages will no longer be deleted. Use `lockdown [reason]` to lock the server again.");
       });
     }
   }

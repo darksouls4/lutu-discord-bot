@@ -12,10 +12,6 @@ const ranker = require("../handlers/ranker.js");
 const fs = require("fs");
 const moment = require("moment");
 
-mongoose.connect(databaseUrl, {
-  useNewUrlParser: true
-});
-
 module.exports = class {
   constructor (client) {
     this.client = client;

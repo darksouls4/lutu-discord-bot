@@ -22,35 +22,35 @@ class Mute extends Command {
   async run (message, args, level, reply) { // eslint-disable-line no-unused-vars
     const tomute = message.mentions.members.first() || message.guild.members.get(args[0]);
 
-    if (!tomute) return reply("<a:aRedTick:556121032507916290> You haven't specified any user.");
-    if (message.author.id === tomute.id) return reply("<a:aRedTick:556121032507916290> I cannot allow any self-harm.");
-    if (tomute.hasPermission("MANAGE_MESSAGES")) return reply("<a:aRedTick:556121032507916290> Oops, looks like who you're trying to mute is a Moderator!");
+    if (!tomute) return reply("You haven't specified any user.");
+    if (message.author.id === tomute.id) return reply("I cannot allow any self-harm.");
+    if (tomute.hasPermission("MANAGE_MESSAGES")) return reply("Oops, looks like who you're trying to mute is a Moderator!");
     const mutetime = args[1];
     let reason = args.slice(2).join(" ");
     if (!reason) reason = "Not specified.";
 
     const muterole = message.guild.roles.find(c => c.name === "Muted");
 
-    if (!muterole) return reply("<a:aRedTick:556121032507916290> The `Muted` role couldn't be found. Pleaae run `" + message.guild.settings.prefix + "setup mutedrole` to to fix that!");
+    if (!muterole) return reply("The `Muted` role couldn't be found. Pleaae run `" + message.guild.settings.prefix + "setup mutedrole` to to fix that!");
 
-    if (tomute.roles.has(muterole.id)) return reply("<a:aRedTick:556121032507916290> Oops! It looks like this user is already muted.");
+    if (tomute.roles.has(muterole.id)) return reply("Oops! It looks like this user is already muted.");
 
     try {
       ms(ms(mutetime));
     } catch (err) {
-      return reply("<a:aRedTick:556121032507916290> Please specify a valid mute duration.");
+      return reply("Please specify a valid mute duration.");
     }
     try {
       await(tomute.roles.add(muterole.id));
     } catch (e) {
-      return reply(`<a:aRedTick:556121032507916290> Snap, couldn't mute **${tomute.user.tag}** because ${e}.`);
+      return reply(`Snap, couldn't mute **${tomute.user.tag}** because ${e}.`);
     }
     if (message.guild.settings.moderationLogs.toLowerCase() === "on") {
       const Logger = new logHandler({ client: this.client, case: "muteAdd", guild: message.guild.id, member: tomute.user, moderator: message.author, reason: reason, duration: ms(ms(mutetime)) });
       Logger.send().then(t => Logger.kill());
     }
 
-    reply(`<a:aGreenTick:556121203136528388> Muted **${tomute.user.tag}** for \`${ms(ms(mutetime))}\`.`);
+    reply(`Muted **${tomute.user.tag}** for \`${ms(ms(mutetime))}\`.`);
 
     setTimeout(async () => {
       await tomute.roles.remove(muterole.id);

@@ -29,21 +29,21 @@ class Stats extends Command {
 
     const embed = new Discord.MessageEmbed()
       .setTitle("Bot's Statistics")
-      .setAuthor(message.author.tag, message.author.displayAvatarURL)
+      .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setColor("#36393e")
       .setDescription(`
-<:memory:542685124714561546> Memory Usage: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB
-<:uptime:542685590244687885> Uptime: ${time}
-📻 Channel Count: ${this.client.channels.size.toLocaleString()}
-<:discord:542687124135215115> Server Count: ${this.client.guilds.size.toLocaleString()}
-👥 User Count: ${users.toLocaleString()}
-<:discordjs:542691319210835969> Discord.Js Version: v${version}
-<:nodejs:542992297906929675> Node.JS Version: ${process.version}
-⏱ Latency: ${m.createdTimestamp - message.createdTimestamp} MS
+Memory Usage: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB
+Uptime: ${time}
+Channel Count: ${this.client.channels.size.toLocaleString()}
+Server Count: ${this.client.guilds.size.toLocaleString()}
+User Count: ${users.toLocaleString()}
+Discord.Js Version: v${version}
+Node.JS Version: ${process.version}
+Latency: ${m.createdTimestamp - message.createdTimestamp} MS
       `)
       .setThumbnail(this.client.user.displayAvatarURL)
       .setTimestamp();
-    m.edit("", embed);      
+    m.edit("", embed);
   }
 }
 

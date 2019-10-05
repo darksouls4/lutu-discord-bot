@@ -21,7 +21,7 @@ class Forget extends Command {
 
   async run (message, args, level, reply) { // eslint-disable-line no-unused-vars
     const user = message.mentions.members.first() || message.guild.members.get(args[1]);
-    if (!user) return reply("<a:aRedTick:556121032507916290> You haven't specified a valid user.");
+    if (!user) return reply("You haven't specified a valid user.");
 
     let warnsToR = parseInt(args[0]);
     let reason = args.slice(2).join(" ");
@@ -50,8 +50,8 @@ class Forget extends Command {
         const Logger = new logHandler({ client: this.client, case: "pardon", guild: message.guild.id, member: user.user, reason: reason, moderator: message.author, amount: warnsToR });
         Logger.send().then(t => Logger.kill());
       }
-      
-      reply(`<a:aGreenTick:556121203136528388> Successfully forgot \`${warnsToR}\` infraction(s) from **${user.user.tag}**'s audit.`);
+
+      reply(`Successfully forgot \`${warnsToR}\` infraction(s) from **${user.user.tag}**'s audit.`);
     });
   }
 }

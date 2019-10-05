@@ -34,24 +34,19 @@ class Fetch extends Command {
 	  try {
 	    const guildBans = await message.guild.fetchBans();
 	    if (guildBans.has(user.id)){
-		    // message.guild.members.unban(user.id)
+		     message.guild.members.unban(user.id)
 	    } else {
-		    return message.channel.send(`<a:aRedTick:556121032507916290> Sorry! This user is not banned.`);
+		    return message.channel.send(`Sorry! This user is not banned.`);
 	    }
 
     } catch (e) {
-      return message.channel.send(`<a:aRedTick:556121032507916290> Oh snap! I couldn't unban the specified user! Reason: ${e}.`);
+      return message.channel.send(`Oh snap! I couldn't unban the specified user! Reason: ${e}.`);
     }
     if (message.guild.settings.moderationLogs.toLowerCase() === "on") {
       const Logger = new logHandler({ client: this.client, case: "unban", guild: message.guild.id, member: user, moderator: message.author, reason: reason });
       Logger.send().then(t => Logger.kill());
     }
-    return reply(`<a:aGreenTick:556121203136528388> Successfully unbaned **${user.tag}** from this server.`);
-
-
-
-
-
+    return reply(`Successfully unbaned **${user.tag}** from this server.`);
   }
 }
 

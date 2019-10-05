@@ -24,7 +24,7 @@ class Invite extends Command {
 - Lutu's Invite Link:  https://discordapp.com/oauth2/authorize?client_id=${this.client.user.id}&permissions=8&scope=bot
  This link contains Administrator permission which are neccesary for the bot to work properly. We highly disrecommend changing the permissions.
 
-- Support Server Invite Link: https://discord.gg/WkDuC5e
+- Support Server Invite Link: https://discord.gg/?
  This link redirects you to the Lutu's Support Server where you can ask for assistance, report bugs or even give us suggestions on what we should add and/or improve.
 `)
       .setColor("#36393e")

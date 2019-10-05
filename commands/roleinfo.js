@@ -20,18 +20,18 @@ class Roleinfo extends Command {
 
   async run (message, args, level, reply) { // eslint-disable-line no-unused-vars
     let roleName = message.content.split(" ").slice(1).join(" ");
-	let thisrole =	message.guild.roles.find(role => role.name === roleName)
+	  let thisrole =	message.guild.roles.find(role => role.name === roleName)
     if(!thisrole) return message.channel.send(`the role **${roleName}** was not found, please check input and capitalization.`)
-	
-	let rolename = thisrole.name
-	let rolemembers = thisrole.members.size
-	let rolecolor = thisrole.color
-	let roleposition =  thisrole.position
-	let rolemontionable = thisrole.mentionable
-	let roleadmin = thisrole.permissions.has('ADMINISTRATOR')
-	let rolehoist = thisrole.hoist
-	let roleid = thisrole.id
-	
+
+  	let rolename = thisrole.name
+  	let rolemembers = thisrole.members.size
+  	let rolecolor = thisrole.color
+  	let roleposition =  thisrole.position
+  	let rolemontionable = thisrole.mentionable
+  	let roleadmin = thisrole.permissions.has('ADMINISTRATOR')
+  	let rolehoist = thisrole.hoist
+  	let roleid = thisrole.id
+
 
     let roleEmbed = new Discord.MessageEmbed()
       .setTitle(`role info for ${rolename}`)
@@ -40,7 +40,7 @@ class Roleinfo extends Command {
       .setColor(rolecolor)
       .setTimestamp();
 
-    return message.channel.send(roleEmbed);
+    return reply(roleEmbed);
   }
 }
 

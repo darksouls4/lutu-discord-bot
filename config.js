@@ -1,11 +1,11 @@
 const config = {
   "token":  "CLIENT_TOKEN",
   "prefix": "?",
-  "admins": ["],
+  "admins": [],
   "dbUrl": "MONGODB_URL",
   "patreons": [],
   "supporters": [],
-  
+
   "dashboard" : {
     "oauthSecret": "CLIENT_SECRET",
     "callbackURL": "http://localhost/callback", // add this to callback urls in your application's OAuth tab
@@ -14,12 +14,20 @@ const config = {
     "port": 80
   },
 
+  /* Channels */
+  "appealEmbedChannel": "CHANNEL_ID",
+  "banListLogChannel": "CHANNEL_ID",
+  "reportRejectedEmbedChannel": "CHANNEL_ID",
+  "reportApprovedEmbedChannel": "CHANNEL_ID",
+  "newReportEmbed": "CHANNEL_ID",
+  "guildLogChannel": "CHANNEL_ID",
+
   permLevels: [
     { level: 0,
       name: "User",
       check: () => true
     },
-  
+
     { level: 2,
       name: "Moderator",
       check: (message) => {
@@ -34,7 +42,7 @@ const config = {
         }
       }
     },
-  
+
     { level: 3,
       name: "Administrator",
       check: (message) => {
@@ -49,7 +57,7 @@ const config = {
         }
       }
     },
-  
+
     { level: 4,
       name: "Server Owner",
       check: (message) => {
@@ -65,12 +73,12 @@ const config = {
       name: "Bot Admin",
       check: (message) => config.admins.includes(message.author.id)
     },
-  
+
     { level: 10,
       name: "Bot Owner",
       check: (message) => message.client.appInfo.owner.id === message.author.id
     }
   ]
 };
-  
+
 module.exports = config;

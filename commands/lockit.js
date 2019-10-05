@@ -20,6 +20,8 @@ class Lockit extends Command {
   }
 
   async run (message, args, level, reply) { // eslint-disable-line no-unused-vars
+    reply(`Channel can be viewed by everyone.`);
+    
     const role = message.guild.roles.find(r => r.id === message.guild.id);
     const reason = args.join(" ") || "Not Specified";
 
@@ -29,13 +31,13 @@ class Lockit extends Command {
          "SEND_MESSAGES": false
        }, "Lockit command used.");
       } catch (e) {
-        return reply(`<a:aRedTick:556121032507916290> I cannot lock channel because ${e}.`);
+        return reply(`I cannot lock channel because ${e}.`);
       }
       if (message.guild.settings.moderationLogs.toLowerCase() === "on") {
         const Logger = new logHandler({ client: this.client, case: "lockitOn", channel: message.channel, guild: message.guild.id, moderator: message.author, reason: reason });
         Logger.send().then(t => Logger.kill());
       }
-      return reply("<a:aGreenTick:556121203136528388> This channel is now read-only.");
+      return reply("This channel is now read-only.");
 
     } else if (!message.channel.permissionsFor(role).has("SEND_MESSAGES")) {
       try {
@@ -43,13 +45,13 @@ class Lockit extends Command {
          "SEND_MESSAGES": null
         }, "Lockit command used.");
       } catch (e) {
-        return reply(`<a:aRedTick:556121032507916290> I cannot unlock channel because ${e}.`);
+        return reply(`I cannot unlock channel because ${e}.`);
       }
       if (message.guild.settings.moderationLogs.toLowerCase() === "on") {
         const Logger = new logHandler({ client: this.client, case: "lockitOff", channel: message.channel, guild: message.guild.id, moderator: message.author, reason: reason });
         Logger.send().then(t => Logger.kill());
       }
-      return reply("<a:aGreenTick:556121203136528388> This channel has been unlocked.");
+      return reply("This channel has been unlocked.");
 
     }
   }

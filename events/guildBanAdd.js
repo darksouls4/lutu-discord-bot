@@ -5,9 +5,6 @@ const Discord = require("discord.js"); // eslint-disable-line no-unused-vars
  const Settings = require("../models/settings.js");
  const logHandler = require("../handlers/serverLogger.js");
 
- mongoose.connect(databaseUrl, {
-   useNewUrlParser: true
- });
 module.exports = class {
   constructor (client) {
     this.client = client;

@@ -17,8 +17,6 @@ class Echo extends Command {
   }
 
   async run (message) { // eslint-disable-line no-unused-vars
-    message.channel.send("Disclamer, by using the bot you agree and comply with Privacy Policy and Terms of Service.\nTerms of Service: https://lutu.gq/terms\nPrivacy Policy: https://lutu.gq/privacy");
-
     const messageArray = message.content.split(" ");
     let args = messageArray.slice(1);
 

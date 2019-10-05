@@ -5,10 +5,6 @@ const databaseUrl = config.dbUrl;
 const Settings = require("../models/settings.js");
 const Bans = require("../models/bans.js");
 
-mongoose.connect(databaseUrl, {
-  useNewUrlParser: true
-});
-
 module.exports = class {
   constructor (client) {
     this.client = client;

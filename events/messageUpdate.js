@@ -6,10 +6,6 @@ const Discord = require("discord.js"); // eslint-disable-line no-unused-vars
  const automod = require("../handlers/automod.js");
  const lockdown = require("../handlers/lockdown.js");
 
- mongoose.connect(databaseUrl, {
-   useNewUrlParser: true
-});
-
 module.exports = class {
   constructor (client) {
     this.client = client;

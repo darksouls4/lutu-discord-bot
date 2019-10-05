@@ -26,7 +26,7 @@ class Tags extends Command {
         var index = 1;
         var list = `${settings.tags.map(tag => `**${index++}** - ${tag.name}`).join("\n")}`;
         if (settings.tags.length < 1) list = "Could not find any tags!";
-        
+
         const embed1 = new Discord.MessageEmbed()
           .setTitle(`Tags for ${message.guild.name}`)
           .setAuthor(message.author.tag, message.author.displayAvatarURL)
@@ -56,7 +56,7 @@ class Tags extends Command {
             }
           }
 
-          if (foundOrNot === false) return reply(`Could not find any tag named **${args[1]}**.`); 
+          if (foundOrNot === false) return reply(`Could not find any tag named **${args[1]}**.`);
         } else if (!isNaN(args[1])) {
           if (!settings.tags[args[1] - 1]) return reply(`Could not find any tag with position **${args[1]}**.`);
 
@@ -75,12 +75,12 @@ class Tags extends Command {
 
         var indexer = parseInt(args[1]) - 1;
 
-        if (!settings.tags[indexer]) return reply(`<:greenTick:527557795990470656> Tag with position **${args[1]}** dosen't exist. Type \`${settings.prefix}tags list\` to view the list of available tags an theyr positions for your server.`);
+        if (!settings.tags[indexer]) return reply(`Tag with position **${args[1]}** dosen't exist. Type \`${settings.prefix}tags list\` to view the list of available tags an theyr positions for your server.`);
         settings.tags.splice(indexer, 1);
 
         await settings.save().catch(e => this.client.logger.log(e, "error"));
 
-        return reply(`<:greenTick:527557795990470656> Tag with position **${args[1]}** has been removed.`);
+        return reply(`Tag with position **${args[1]}** has been removed.`);
       } else if (args[0].toLowerCase() === "add") {
         if (!args[1]) return reply("You must specify a keyword for the tag.");
         const ctx = args.slice(2).join(" ");
@@ -94,7 +94,7 @@ class Tags extends Command {
         settings.tags.push(newTag);
         await settings.save().catch(e => this.client.logger.log(e, "error"));
 
-        return reply(`<:greenTick:527557795990470656> Added tag **${args[1]}**. Type \`${settings.prefix}tags list\` to view the list of tags for your server.`);
+        return reply(`Added tag **${args[1]}**. Type \`${settings.prefix}tags list\` to view the list of tags for your server.`);
       } else {
         return reply("Available options for this command are `list`, `view`, `add`, `remove`.");
       }

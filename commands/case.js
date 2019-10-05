@@ -7,10 +7,6 @@ const afterReports = require("../models/aftreports.js");
 const Ban = require("../models/bans.js");
 const Command = require("../base/Command.js");
 
-mongoose.connect(databaseUrl, {
-  useNewUrlParser: true
-});
-
 class Case extends Command {
   constructor (client) {
     super(client, {
@@ -55,7 +51,7 @@ class Case extends Command {
         .addField("[Moderator]:", `▫ Moderator: ${message.author.tag}\n▫ Moderator ID: ${message.author.id}`)
         .setColor("GREEN")
         .setTimestamp();
-      this.client.channels.get("527529340624437266").send(approvedEmbed);
+      this.client.channels.get(this.client.config.reportApprovedEmbedChannel).send(approvedEmbed);
 
       reply(`Report with case id **${complaint.caseID}** has been approved.`);
     } else if (args[1].toLowerCase() === "reject") {
@@ -85,7 +81,7 @@ class Case extends Command {
         .addField("[Moderator]:", `▫ Moderator: ${message.author.tag}\n▫ Moderator ID: ${message.author.id}\nRejection Reason: ${reason}`)
         .setColor("RED")
         .setTimestamp();
-      this.client.channels.get("527529340624437266").send(rejectedEmbed);
+      this.client.channels.get(this.client.config.reportRejectedEmbedChannel).send(rejectedEmbed);
 
       reply(`Report with case id **${complaint.caseID}** has been rejected.`);
     } else {

@@ -5,10 +5,6 @@ const mongoose = require("mongoose");
 const databaseUrl = config.dbUrl;
 const Errors = require("../models/error.js");
 
-mongoose.connect(databaseUrl, {
-  useNewUrlParser: true
-});
-
 class Error extends Command {
   constructor (client) {
     super(client, {
@@ -34,7 +30,7 @@ class Error extends Command {
     }, async (e, r) => {
       if (e) this.client.logger.log(e, "error");
 
-      if (!r) return reply("<a:aRedTick:556121032507916290> Couldn't find any error matching this code!");
+      if (!r) return reply("Couldn't find any error matching this code!");
 
       reply(`\`\`\`${r.err}\`\`\`\n\`\`\`${r.errPath}\`\`\``);
     });

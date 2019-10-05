@@ -36,7 +36,6 @@ class Define extends Command {
         const word = json[0].meta.id;
         const type = json[0].fl;
         const def = json[0].shortdef;
-        // const example = I dunno;
 
         const embed = new Discord.MessageEmbed()
           .setColor("36393e")
@@ -46,11 +45,9 @@ class Define extends Command {
           .catch(console.error);
       }).catch(err => {
         if (err) {
-          message.channel.send(`Sorry, \`${args}\` was not found.\nplease check name and speeling then try again.`);
+          reply(`Sorry, \`${args}\` was not found.\nplease check name and speeling then try again.`);
         }
       });
-  
-  
   }
 }
 

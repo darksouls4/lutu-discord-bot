@@ -18,7 +18,7 @@ class Myperms extends Command {
   }
 
   async run (message, args, level, reply) { // eslint-disable-line no-unused-vars
-    const m = await reply("<a:pending:527838556153053204> Checking your permissions...");
+    const m = await reply("Checking your permissions...");
 
     const lvl = await this.client.permlevel(message);
 
@@ -27,31 +27,31 @@ class Myperms extends Command {
     let sown;
 
     if (lvl > 3 || lvl === 3) {
-      admin = "Yes <a:aGreenTick:556121203136528388>";
+      admin = "Yes";
     } else {
-      admin = "No <a:aRedTick:556121032507916290>";
+      admin = "No";
     }
 
     if (lvl > 2 || lvl === 2) {
-      mod = "Yes <a:aGreenTick:556121203136528388>";
+      mod = "Yes";
     } else {
-      mod = "No <a:aRedTick:556121032507916290>";
+      mod = "No";
     }
 
     if (lvl > 4 || lvl === 4) {
-      sown = "Yes <a:aGreenTick:556121203136528388>";
+      sown = "Yes";
     } else {
-      sown = "No <a:aRedTick:556121032507916290>";
+      sown = "No";
     }
 
 
     const pEmbed = new Discord.MessageEmbed()
-      .setAuthor(message.author.tag, message.author.avatarURL)
+      .setAuthor(message.author.tag, message.author.avatarURL())
       .setDescription(`
 Your Permissions for this server:
 
 • Server Owner - ${sown}
-• Server Administrator: ${admin} 
+• Server Administrator: ${admin}
 • Server Moderator - ${mod}
       `)
       .setColor("#36393e")

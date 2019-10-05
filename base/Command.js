@@ -10,12 +10,11 @@ class Command {
     permLevel = "User",
     cooldown = 3,
     args = false,
-    rank = "User"
   }) {
     this.client = client;
-    this.conf = { enabled, guildOnly, aliases, permLevel, cooldown, args, rank };
+    this.conf = { enabled, guildOnly, aliases, permLevel, cooldown, args };
     this.help = { name, description, category, usage };
   }
 }
-  
+
 module.exports = Command;

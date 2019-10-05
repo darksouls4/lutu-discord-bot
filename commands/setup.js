@@ -1,7 +1,7 @@
 const Discord = require ("discord.js"); // eslint-disable-line no-unused-vars
 const Command = require("../base/Command.js");
 
-class Forget extends Command {
+class Setup extends Command {
   constructor (client) {
     super(client, {
       name: "setup",
@@ -19,48 +19,48 @@ class Forget extends Command {
 
   async run (message, args, level, reply) { // eslint-disable-line no-unused-vars
     if (!args[0]) return reply("Correct usage : `setup mutedrole`.");
-    if (args[0].toLowerCase() === "mutedrole") { 
+    if (args[0].toLowerCase() === "mutedrole") {
       let mutedRole = message.guild.roles.find(r => r.name === "Muted");
       if (mutedRole) {
-        const ms = await reply("The 'Muted' role already exists. Do you want to overwrite its permissions and make it Lutu's 'Muted' role?\n\n<a:aGreenTick:556121203136528388> - Yes\n<a:aRedTick:556121032507916290> - No");
-        await ms.react("556120813481361408");
-        await ms.react("557295354471514163");
+        const ms = await reply("The 'Muted' role already exists. Do you want to overwrite its permissions and make it Lutu's 'Muted' role?\n\n- Yes\n- No");
+        await ms.react("✅");
+        await ms.react("❎");
         const collected = await ms.awaitReactions((reaction, user) => user.id === message.author.id, {max: 1, time: 60000, errors: ["time"] });
         const res = collected.first().emoji.name;
 
-        if (res === "redTick") {
+        if (res === "✅") {
           ms.delete();
         } else if (res === "greenTick") {
-          await ms.edit(`<a:pending:527838556153053204> Starting setup...
-<a:pending:527838556153053204> Initializing Role
-<a:pending:527838556153053204> Setting Permissions for Categories
-<a:pending:527838556153053204> Setting Permissions for Text Channels
-<a:pending:527838556153053204> Setting Permissions for Voice Channels
+          await ms.edit(`Starting setup...
+Initializing Role
+Setting Permissions for Categories
+Setting Permissions for Text Channels
+Setting Permissions for Voice Channels
           `);
 
-          await ms.edit(`<a:aGreenTick:556121203136528388> Setup started!
-<a:pending:527838556153053204> Initializing Role...
-<a:pending:527838556153053204> Setting Permissions for Categories
-<a:pending:527838556153053204> Setting Permissions for Text Channels
-<a:pending:527838556153053204> Setting Permissions for Voice Channels
+          await ms.edit(`Setup started!
+Initializing Role...
+Setting Permissions for Categories
+Setting Permissions for Text Channels
+Setting Permissions for Voice Channels
           `);
 
           try {
             await mutedRole.setPermissions(0);
           } catch (e) {
-            return ms.edit(`<a:aGreenTick:556121203136528388> Setup initialized!
-<a:aRedTick:556121032507916290> Initializing Role Failed! Missing permissions!
-<a:aRedTick:556121032507916290> Setting Permissions for Categories Failed! Missing permissions!
-<a:aRedTick:556121032507916290> Setting Permissions for Text Channels Failed! Missing permissions!
-<a:aRedTick:556121032507916290> Setting Permissions for Voice Channels Failed! Missing permissions!
+            return ms.edit(`Setup initialized!
+Initializing Role Failed! Missing permissions!
+Setting Permissions for Categories Failed! Missing permissions!
+Setting Permissions for Text Channels Failed! Missing permissions!
+Setting Permissions for Voice Channels Failed! Missing permissions!
             `);
           }
 
-          await ms.edit(`<a:aGreenTick:556121203136528388> Setup initialized!
-<a:aGreenTick:556121203136528388> Role initialized!
-<a:pending:527838556153053204> Setting Permissions for Categories
-<a:pending:527838556153053204> Setting Permissions for Text Channels
-<a:pending:527838556153053204> Setting Permissions for Voice Channels
+          await ms.edit(`Setup initialized!
+Role initialized!
+Setting Permissions for Categories
+Setting Permissions for Text Channels
+Setting Permissions for Voice Channels
           `);
 
           try {
@@ -71,43 +71,43 @@ class Forget extends Command {
               });
             });
           } catch (e) {
-            return ms.edit(`<a:aGreenTick:556121203136528388> Setup initialized!
-<a:aRedTick:556121032507916290> Initializing Role Failed! Missing permissions!
-<a:aRedTick:556121032507916290> Setting Permissions for Categories Failed! Missing permissions!
-<a:aRedTick:556121032507916290> Setting Permissions for Text Channels Failed! Missing permissions!
-<a:aRedTick:556121032507916290> Setting Permissions for Voice Channels Failed! Missing permissions!
+            return ms.edit(`Setup initialized!
+Initializing Role Failed! Missing permissions!
+Setting Permissions for Categories Failed! Missing permissions!
+Setting Permissions for Text Channels Failed! Missing permissions!
+Setting Permissions for Voice Channels Failed! Missing permissions!
             `);
           }
 
-          await ms.edit(`<a:aGreenTick:556121203136528388> Setup initialized!
-<a:aGreenTick:556121203136528388> Role initialized!
-<a:aGreenTick:556121203136528388> Permissions for Categories have been set!
-<a:aGreenTick:556121203136528388> Permissions for Text Channels have been set!
-<a:aGreenTick:556121203136528388> Permissions for Voice Channels have been set!
+          await ms.edit(`Setup initialized!
+Role initialized!
+Permissions for Categories have been set!
+Permissions for Text Channels have been set!
+Permissions for Voice Channels have been set!
 
-<a:aGreenTick:556121203136528388> 'Muted' role is ready!
+'Muted' role is ready!
           `);
 
-          
+
         } else {
-          return reply("<a:aRedTick:556121032507916290> Invalid choice or prompt, timed out. Aborted.");
+          return reply("Invalid choice or prompt, timed out. Aborted.");
         }
       } else {
         try {
           const ms = await reply("Unpacking setup of 'Muted' role.");
 
-          await ms.edit(`<a:pending:527838556153053204> Initializing setup...
-<a:pending:527838556153053204> Initializing Role
-<a:pending:527838556153053204> Setting Permissions for Categoris
-<a:pending:527838556153053204> Setting Permissions for Text Channels
-<a:pending:527838556153053204> Setting Permissions for Voice Channels
+          await ms.edit(`Initializing setup...
+Initializing Role
+Setting Permissions for Categoris
+Setting Permissions for Text Channels
+Setting Permissions for Voice Channels
           `);
 
-          await ms.edit(`<a:aGreenTick:556121203136528388> Setup initialized!
-<a:pending:527838556153053204> Initializing Role...
-<a:pending:527838556153053204> Setting Permissions for Categories
-<a:pending:527838556153053204> Setting Permissions for Text Channels
-<a:pending:527838556153053204> Setting Permissions for Voice Channels
+          await ms.edit(`Setup initialized!
+Initializing Role...
+Setting Permissions for Categories
+Setting Permissions for Text Channels
+Setting Permissions for Voice Channels
           `);
 
           try {
@@ -117,22 +117,22 @@ class Forget extends Command {
                 color: "#000001",
                 permissions: []
               }
-                
+
             });
           } catch (e) {
-            return ms.edit(`<a:aGreenTick:556121203136528388> Setup initialized!
-<a:aRedTick:556121032507916290> Initializing Role Failed! Missing permissions!
-<a:aRedTick:556121032507916290> Setting Permissions for Categories Failed! Missing permissions!
-<a:aRedTick:556121032507916290> Setting Permissions for Text Channels Failed! Missing permissions!
-<a:aRedTick:556121032507916290> Setting Permissions for Voice Channels Failed! Missing permissions!
+            return ms.edit(`Setup initialized!
+Initializing Role Failed! Missing permissions!
+Setting Permissions for Categories Failed! Missing permissions!
+Setting Permissions for Text Channels Failed! Missing permissions!
+Setting Permissions for Voice Channels Failed! Missing permissions!
             `);
           }
 
-          await ms.edit(`<a:aGreenTick:556121203136528388> Setup initialized!
-<a:aGreenTick:556121203136528388> Role initialized!
-<a:pending:527838556153053204> Setting Permissions for Categories
-<a:pending:527838556153053204> Setting Permissions for Text Channels
-<a:pending:527838556153053204> Setting Permissions for Voice Channels
+          await ms.edit(`Setup initialized!
+Role initialized!
+Setting Permissions for Categories
+Setting Permissions for Text Channels
+Setting Permissions for Voice Channels
           `);
 
           try {
@@ -143,21 +143,21 @@ class Forget extends Command {
               });
             });
           } catch (e) {
-            return ms.edit(`<a:aGreenTick:556121203136528388> Setup initialized!
-<a:aRedTick:556121032507916290> Initializing Role Failed! Missing permissions!
-<a:aRedTick:556121032507916290> Setting Permissions for Categories Failed! Missing permissions!
-<a:aRedTick:556121032507916290> Setting Permissions for Text Channels Failed! Missing permissions!
-<a:aRedTick:556121032507916290> Setting Permissions for Voice Channels Failed! Missing permissions!
+            return ms.edit(`Setup initialized!
+Initializing Role Failed! Missing permissions!
+Setting Permissions for Categories Failed! Missing permissions!
+Setting Permissions for Text Channels Failed! Missing permissions!
+Setting Permissions for Voice Channels Failed! Missing permissions!
             `);
           }
 
-          await ms.edit(`<a:aGreenTick:556121203136528388> Setup initialized!
-<a:aGreenTick:556121203136528388> Role initialized!
-<a:aGreenTick:556121203136528388> Permissions for Categories have been set!
-<a:aGreenTick:556121203136528388> Permissions for Text Channels have been set!
-<a:aGreenTick:556121203136528388> Permissions for Voice Channels have been set!
+          await ms.edit(`Setup initialized!
+Role initialized!
+Permissions for Categories have been set!
+Permissions for Text Channels have been set!
+Permissions for Voice Channels have been set!
 
-<a:aGreenTick:556121203136528388> The 'Muted' role is now ready!
+The 'Muted' role is now ready!
           `);
         } catch (e) {
           console.log(e.stack);
@@ -169,4 +169,4 @@ class Forget extends Command {
   }
 }
 
-module.exports = Forget;
+module.exports = Setup;

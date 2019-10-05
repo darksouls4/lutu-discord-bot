@@ -4,10 +4,6 @@ const Bans = require("../models/bans.js");
 const databaseUrl = require("../config.js").dbUrl;
 const mongoose = require("mongoose");
 
-mongoose.connect(databaseUrl, {
-  useNewUrlParser: true
-});
-
 class Lookup extends Command {
   constructor (client) {
     super(client, {
@@ -26,13 +22,13 @@ class Lookup extends Command {
 
   async run (message, args, level, reply) { // eslint-disable-line no-unused-vars
     const usr = message.mentions.members.first() || message.guild.members.get(args[0]) || args[0]; // eslint-disable-line
-    if (!usr) return reply("<a:aRedTick:556121032507916290> Looks like you didn't specify a valid user.");
+    if (!usr) return reply("Looks like you didn't specify a valid user.");
 
     if (usr === args[0]) {
       try {
         await this.client.fetchUser(args[0]);
       } catch (e) {
-        return reply("<a:aRedTick:556121032507916290> Looks like you didn't specify a valid user.");
+        return reply("Looks like you didn't specify a valid user.");
       }
     }
 
@@ -57,11 +53,11 @@ class Lookup extends Command {
         .setTimestamp();
 
       if (!u) {
-        embed.addField("[Status]:", "<a:aGreenTick:556121203136528388> Not Banned");
+        embed.addField("[Status]:", "Not Banned");
       }
 
       if (u) {
-        embed.addField("[Status]:", "<a:aRedTick:556121032507916290> Banned");
+        embed.addField("[Status]:", "Banned");
         embed.addField("[Complaint]:", `▫ CaseID: ${u.caseID}\n▫ Reason: ${u.caseReason}\n▫ Approved at: ${u.caseAcceptedAt}\n▫ Proofs: ${u.proofs.join(", ")}`);
       }
 

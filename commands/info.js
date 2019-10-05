@@ -21,7 +21,7 @@ class Info extends Command {
     const infoEmbed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL)
       .setTitle("Information About Lutu")
-      .setDescription(`I'm lutu, one of best moderation bots out there, and the only one you need for your server, easy management tons of features and even new ones every week. I have easy to use built-in AutoMod and many more features to enhance security in your server.
+      .setDescription(`I'm lutu, one of best moderation bots out there, and the only one you need for your server, easy management tons of features and even new ones every week. I have easy to use built-in AutoMod and many more features to enhance security in your server. Now open source!
 
 - **Get in touch**:
 Mention bot or type \`${message.guild ? message.guild.settings.prefix : "?"}help\` to get a list of commands.
@@ -30,8 +30,8 @@ Type \`${message.guild ? message.guild.settings.prefix : "?"}invite\` to join su
 - **Features**:
 • Lockdown Features
 • Performant Automoderator (Anti-NSFW, Anti-Spam, etc.)
-• Join Role (Beta)
-• Web Dashboard ([https://lutu.gq/](https://lutu.gq/))
+• Join Role
+• Web Dashboard
 • Prevent Mallicious Users
 • Different Tools
 • Easy To Configure
@@ -41,15 +41,14 @@ Type \`${message.guild ? message.guild.settings.prefix : "?"}invite\` to join su
 [MongoDB - Database (Mongoose v5.4.19)](https://mongodb.com/)
 [Express - Dashboard v4.16.4](https://expressjs.com/)
 [Sightengine - Image Evaluator v1.3.1](https://sightengine.com/)
-[Discord Bot List Api - DBL Webhooks v2.3.0](https://discordbots.org/api/docs)
 
-- **Lutu Staff Team**:
-MrAugu#9016 - Developer/Founder
+- **Lutu Development Team**:
+MrAugu#7917 - Developer/Founder
 DataCell#4008 - Developer/Hosting Sponsor/Admin/Linguist
 zaydme#0140 - Developer/Admin
 
-Bot made by MrAugu#9016.
-`);
+Bot made by MrAugu#7917.
+Source Code: https://github.com/MrAugu/lutu-discord-bot`);
     reply(infoEmbed);
   }
 }
