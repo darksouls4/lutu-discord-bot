@@ -5,13 +5,12 @@ Git Command Line Interface Instructions
 git status
 git add .
 git commit -m '<Message in Here>'
-git push https://gitlab.com/MrAugu/lutu-bot master
+git push https://github.com/MrAugu/lutu-discord-bot master
 
 
 # Getting Code to another machine
 
-git clone https://gitlab.com/MrAugu/lutu-bot
-
+git clone https://github.com/MrAugu/lutu-discord-bot
 
 # Updating Code from GitLab
 
