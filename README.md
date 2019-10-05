@@ -6,7 +6,7 @@ No new features are going to be implemented outside pull requests from peoples. 
 
 For help & support join [MrAugu's Discord Server](https://discord.gg/rk7cVyk).
 
-To support this and many more projects, [become a patron](https://www.patreon.com/mraugu).
+To support this and many other projects, [become a patron](https://www.patreon.com/mraugu).
 
 ## Requirments
 NodeJS - Optimal Version: `v12.3.1`
