@@ -29,7 +29,7 @@ class Selfrole extends Command {
 
         const embed1 = new Discord.MessageEmbed()
           .setTitle(`Self roles for ${message.guild.name}`)
-          .setAuthor(message.author.tag, message.author.displayAvatarURL)
+          .setAuthor(message.author.tag, message.author.displayAvatarURL())
           .setDescription(` **List of self roles:**\n\n${list}`)
           .setColor("#36393e")
           .setTimestamp();
@@ -46,7 +46,7 @@ class Selfrole extends Command {
 
               const embed2 = new Discord.MessageEmbed()
                 .setTitle(`Showing self role : ${selfrole.name}`)
-                .setAuthor(message.author.tag, message.author.displayAvatarURL)
+                .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .addField("selfrole Name:", `${selfrole.name}`)
                 .addField("selfrole ID:", `${selfrole.ID}`)
                 .setColor("#36393e")
@@ -62,7 +62,7 @@ class Selfrole extends Command {
 
           const embed3 = new Discord.MessageEmbed()
             .setTitle(`Showing self role: ${settings.selfroles[args[1] - 1].name}`)
-            .setAuthor(message.author.tag, message.author.displayAvatarURL)
+            .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .addField("selfrole Name:", `${settings.selfroles[args[1] - 1].name}`)
             .addField("selfrole ID:", `${settings.selfroles[args[1] - 1].ID}`)
             .setColor("#36393e")

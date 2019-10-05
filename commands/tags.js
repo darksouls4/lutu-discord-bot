@@ -29,7 +29,7 @@ class Tags extends Command {
 
         const embed1 = new Discord.MessageEmbed()
           .setTitle(`Tags for ${message.guild.name}`)
-          .setAuthor(message.author.tag, message.author.displayAvatarURL)
+          .setAuthor(message.author.tag, message.author.displayAvatarURL())
           .setDescription(` **List of tags:**\n\n${list}`)
           .setColor("#36393e")
           .setTimestamp();
@@ -46,7 +46,7 @@ class Tags extends Command {
 
               const embed2 = new Discord.MessageEmbed()
                 .setTitle(`Showing Tag: ${tag.name}`)
-                .setAuthor(message.author.tag, message.author.displayAvatarURL)
+                .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .addField("Tag Name:", `${tag.name}`)
                 .addField("Tag Content:", `${tag.content}`)
                 .setColor("#36393e")
@@ -62,7 +62,7 @@ class Tags extends Command {
 
           const embed3 = new Discord.MessageEmbed()
             .setTitle(`Showing Tag: ${settings.tags[args[1] - 1].name}`)
-            .setAuthor(message.author.tag, message.author.displayAvatarURL)
+            .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .addField("Tag Name:", `${settings.tags[args[1] - 1].name}`)
             .addField("Tag Content:", `${settings.tags[args[1] - 1].content}`)
             .setColor("#36393e")

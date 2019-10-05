@@ -29,7 +29,7 @@ class Setting extends Command {
 
     const settingEmbed = new Discord.MessageEmbed()
       .setTitle(`Settings for ${message.guild.name}`)
-      .setAuthor(message.author.tag, message.author.displayAvatarURL)
+      .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .addField("[General]:", `▫ Prefix: \`|${settings.prefix}|\` Do not include the 2x |.\n▫ Moderation Log Channel: ${message.guild.channels.get(settings.logsChannel) || "NONE"}\n▫ Under Attack: ${settings.underAttack.toUpperCase()}`)
       .addField("[Roles]:", `▫ Moderator Role: ${message.guild.roles.get(settings.modRole) || "NONE"}\n▫ Administrator Role: ${message.guild.roles.get(settings.adminRole) || "NONE"}\n▫ Auto Join Role: ${message.guild.roles.get(settings.joinrole) || "NONE"}`)
       .addField("[Auto-Moderator]:", `▫ AntiSpam: ${settings.antiSpam.toUpperCase()}\n▫ AntiLinks: ${settings.antiLinks.toUpperCase()}\n▫ AntiInvites: ${settings.antiInvite.toUpperCase()}\n▫ AntiSwear: ${settings.antiBad.toUpperCase()}\n▫ AntiEveryone: ${settings.antiEveryone.toUpperCase()}\n▫ MaxMentions: ${settings.maxMentions}\n▫ MaxLines: ${settings.maxLines}\n▫ AntiNsfw: ${settings.nsfwDetection.toUpperCase()}`)

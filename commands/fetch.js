@@ -42,13 +42,13 @@ class Fetch extends Command {
     const user = await this.client.users.fetch(id);
 
     if (user.presence.game === null) user.presence.game = "Not Playing Anything";
-    
+
     const uEmbed = new Discord.MessageEmbed()
       .setTitle(`${user.tag}`)
       .addField("[User]:", `▫ Username: ${user.username}\n▫ Tag: ${user.tag}\n▫ ID: ${id}\n▫ Bot: ${bot[user.bot]}`)
       .addField("[Presence]:", `▫ Game: ${user.presence.game || "Not Playing Anything"}\n▫ Status: ${statuses[user.presence.status]}`)
       .addField("[Joined Discord:]", `${prettyMs(message.createdTimestamp - user.createdTimestamp)} ago`)
-      .setThumbnail(user.displayAvatarURL)
+      .setThumbnail(user.displayAvatarURL())
       .setColor("#36393e")
       .setTimestamp();
 

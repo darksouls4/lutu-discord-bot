@@ -21,6 +21,8 @@ const config = {
   "reportApprovedEmbedChannel": "CHANNEL_ID",
   "newReportEmbed": "CHANNEL_ID",
   "guildLogChannel": "CHANNEL_ID",
+  "commandLogChannel": "CHANNEL_ID",
+  "errorChannel": "CHANNEL_ID",
 
   permLevels: [
     { level: 0,

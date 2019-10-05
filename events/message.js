@@ -8,7 +8,6 @@ const Settings = require("../models/settings.js");
 const Error = require("../models/error.js");
 const automod = require("../handlers/automod.js");
 const lockdown = require("../handlers/lockdown.js");
-const ranker = require("../handlers/ranker.js");
 const fs = require("fs");
 const moment = require("moment");
 
@@ -79,8 +78,8 @@ Basic Commands:
 \`${guildSettings.prefix}help\` - Get a list of commands.
 \`${guildSettings.prefix}info\` - Basic information about Lutu.
 
-Created by MrAugu#9016.
-
+Created by MrAugu#7917.
+Source Code: https://github.com/MrAugu/lutu-discord-bot/
         `)
         .setColor("BLUE")
         .setTimestamp();
@@ -121,29 +120,21 @@ Created by MrAugu#9016.
         if (command === selfrole.name) {
           if (message.member.roles.find(role => role.id === selfrole.ID)) {
             message.member.roles.remove(message.guild.roles.find(role => role.id === selfrole.ID));
-            return reply(`<a:aGreenTick:556121203136528388> removed your **${selfrole.name}** role.`);
+            return reply(`Removed your **${selfrole.name}** role.`);
           }
           message.member.roles.add(message.guild.roles.find(role => role.id === selfrole.ID));
-          return reply(`<a:aGreenTick:556121203136528388> You got the **${selfrole.name}** role.`);
+          return reply(`You got the **${selfrole.name}** role.`);
         }
       }
     }
 
     if (!cmd) return;
-    if (level < 9 && this.client.cmdMaintenance === true) return reply("<a:aRedTick:556121032507916290> We are currently undergoing a maintenance we'll be back soon. In meantime you can visit our dashboard at https://lutu.gq/.");
-    if (cmd.conf.enabled === false) return reply("<a:aRedTick:556121032507916290> This command is currently globally disabled. Visit our dashboard at https://lutu.gq/.");
-    if (cmd && !message.guild && cmd.conf.guildOnly) return message.channel.send("<a:aRedTick:556121032507916290> This command is unavailable via private message. Please run this command in a server. Visit our dashboard at https://lutu.gq/.");
-
-    try {
-      await ranker.check(this.client, message);
-      if (cmd.conf.rank === "Upvoter") if (message.rank !== "Upvoter" && message.rank !== "Supporter") return reply(`Whoopsie, seems like this cmd require \`${cmd.conf.rank}\` rank but you are only \`${message.rank}\` rank. To gain Upvoter rank and acces locked commands, please upvote Lutu on discord bot list: https://discordbots.org/bot/523552979664633858\nIf you already voted, give it one minute to process. In meantime you can visit our dashboard at https://lutu.gq/.`);
-      if (cmd.conf.rank === "Supporter") if (message.rank !== "Supporter") return reply(`This cmd require ${cmd.conf.rank} but you have only ${message.rank}. In meantime you can visit our dashboard at https://lutu.gq/.`);
-    } catch (e) {
-      // Do Something
-    }
+    if (level < 9 && this.client.cmdMaintenance === true) return reply("We are currently undergoing a maintenance we'll be back soon.");
+    if (cmd.conf.enabled === false) return reply("This command is currently globally disabled. Visit our dashboard at https://lutu.gq/.");
+    if (cmd && !message.guild && cmd.conf.guildOnly) return message.channel.send("This command is unavailable via private message. Please run this command in a server.");
 
     if (cmd.conf.args === true && !args.length) {
-      return reply(`<a:aRedTick:556121032507916290> You haven't provided any argument.\nCorrect Usage: \`${guildSettings.prefix}${cmd.help.name} ${cmd.help.usage}\`\nCheck out our dashboard at https://lutu.gq/`);
+      return reply(`You haven't provided any argument.\nCorrect Usage: \`${guildSettings.prefix}${cmd.help.name} ${cmd.help.usage}\`\nCheck out the surce code at: https://github.com/MrAugu/lutu-discord-bot/`);
     }
 
     if (!cooldowns.has(cmd.help.name)) {
@@ -163,7 +154,7 @@ Created by MrAugu#9016.
 
         if (now < expirationTime) {
           const timeLeft = (expirationTime - now) / 1000;
-          return reply(`<a:aRedTick:556121032507916290> Slow it down dude. You have to wait ${timeLeft.toFixed(1)} seconds before using \`${cmd.help.name}\` again. In meanwhile you can visit our brand new dashboard at https://lutu.gq/.`);
+          return reply(`Slow it down dude. You have to wait ${timeLeft.toFixed(1)} seconds before using \`${cmd.help.name}\` again.`);
         }
 
         timestamps.set(message.author.id, now);
@@ -172,17 +163,17 @@ Created by MrAugu#9016.
     }
 
     const noPermEmbed = new Discord.MessageEmbed()
-      .setAuthor(message.author.tag, message.author.displayAvatarURL)
+      .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setTitle("FORBIDDEN!")
       .setColor("#36393e")
-      .setAuthor(message.author.tag, message.author.avatarURL)
+      .setAuthor(message.author.tag, message.author.avatarURL())
       .setDescription(`
-<a:aRedTick:556121032507916290> Forbidden! You do not have the required permissions to use \`${cmd.help.name}\`.
+Forbidden! You do not have the required permissions to use \`${cmd.help.name}\`.
 
 ▫ Required Permission Level: ${this.client.levelCache[cmd.conf.permLevel]} - ${cmd.conf.permLevel}
 ▫ Your Permission Level: ${level} - ${this.client.config.permLevels.find(l => l.level === level).name}
 
-Pro Tip: We now have a dashboard - [https://lutu.gq/](https://lutu.gq/)
+Source Code: https://github.com/MrAugu/lutu-discord-bot
           `)
       .setTimestamp();
 
@@ -195,9 +186,9 @@ Pro Tip: We now have a dashboard - [https://lutu.gq/](https://lutu.gq/)
 Raw Input |${message.content}|
 `;
 
-    fs.appendFileSync("log.txt", content, "utf8");
+    fs.appendFileSync("command_logs.txt", content, "utf8");
 
-    this.client.channels.get("565228080231088160").send(`**${cmd.help.name}** was used by \`${message.author.tag}\` (ID: ${message.author.id}) in guild \`${message.guild ? message.guild.name : "Direct Message"}\` (ID: ${message.guild ? message.guild.id : "000000000000000000"}), channel \`${message.channel.name}\` (ID: ${message.channel.id}).\nMessage content: \n\`\`\`${message.content}\`\`\``);
+    this.client.channels.get(this.client.config.commandLogChannel).send(`**${cmd.help.name}** was used by \`${message.author.tag}\` (ID: ${message.author.id}) in guild \`${message.guild ? message.guild.name : "Direct Message"}\` (ID: ${message.guild ? message.guild.id : "000000000000000000"}), channel \`${message.channel.name}\` (ID: ${message.channel.id}).\nMessage content: \n\`\`\`${message.content}\`\`\``);
     try {
       await cmd.run(message, args, level, reply);
     } catch (e) {
@@ -210,8 +201,8 @@ Raw Input |${message.content}|
       });
       await newErr.save().catch(e => console.log(e));
       this.client.logger.error(e);
-      reply(`<a:aRedTick:556121032507916290> Internal error occured!\nError Code: \`${errorCode}\`\nPlease report this error to the developers. Type \`${guildSettings.prefix}invite\` to get a link to the support server. Visit our dashboard at https://lutu.gq/.`);
-      this.client.channels.get("538751041022459934").send(`An internal error occured while running \`${cmd.help.name}.js\`.\n\`\`\`xl\n${e}\`\`\``);
+      reply(`Internal error occured!\nError Code: \`${errorCode}\`\nPlease report this error to the developers. Type \`${guildSettings.prefix}invite\` to get a link to the support server.`);
+      this.client.channels.get(this.client.config.errorChannel).send(`An internal error occured while running \`${cmd.help.name}.js\`.\n\`\`\`xl\n${e}\`\`\``);
     }
   }
 };

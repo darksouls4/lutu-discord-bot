@@ -41,7 +41,7 @@ Discord.Js Version: v${version}
 Node.JS Version: ${process.version}
 Latency: ${m.createdTimestamp - message.createdTimestamp} MS
       `)
-      .setThumbnail(this.client.user.displayAvatarURL)
+      .setThumbnail(this.client.user.displayAvatarURL())
       .setTimestamp();
     m.edit("", embed);
   }

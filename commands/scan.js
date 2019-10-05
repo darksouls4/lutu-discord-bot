@@ -41,7 +41,7 @@ class Scan extends Command {
               .setDescription(`${member[1].user.tag}`)
               .addField("User ID:", `${u.reportedID}`)
               .addField("Report Complaint:", `${u.caseReason}`)
-              .setThumbnail(member[1].user.displayAvatarURL)
+              .setThumbnail(member[1].user.displayAvatarURL())
               .setTimestamp();
             reply(bwEmbed);
           }
@@ -65,7 +65,7 @@ class Scan extends Command {
               .setDescription(`${member[1].user.tag}`)
               .addField("User ID:", `${u.reportedID}`)
               .addField("Report Complaint:", `${u.caseReason}`)
-              .setThumbnail(member[1].user.displayAvatarURL)
+              .setThumbnail(member[1].user.displayAvatarURL())
               .setTimestamp();
             reply(bwEmbed);
             await member[1].ban("Global Ban List Auto-ban");

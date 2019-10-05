@@ -1,5 +1,6 @@
 const Discord = require("discord.js"); // eslint-disable-line no-unused-vars
 const request = require("request");
+const fs = require("fs");
 
 module.exports = class {
   constructor (client) {
@@ -11,6 +12,20 @@ module.exports = class {
     setInterval( async () => {
       this.client.appInfo = await this.client.fetchApplication();
     }, 60000);
+
+    try {
+      fs.readFileSync("botbans.json");
+    } catch (e) {
+      console.log("Creating bot bans file...");
+      fs.appendFileSync("botbans.json", JSON.stringify([], null, 4));
+    }
+
+    try {
+      fs.readFileSync("command_logs.txt");
+    } catch (e) {
+      console.log("Creating command logs file...");
+      fs.appendFileSync("command_logs.txt", "<-- Beggining of Command File -->");
+    }
 
     await this.client.user.setStatus("online");
 

@@ -61,12 +61,12 @@ class Userinfo extends Command {
 
     const emb = new Discord.MessageEmbed()
       .setColor("36393e")
-      .setThumbnail(user.displayAvatarURL)
+      .setThumbnail(user.displayAvatarURL())
       .addField("[User Info]:", `User Tag: ${user.tag}\nJoined Discord: ${joineddiscord}\nLast message: ${messag}\nPlaying: ${game}\nStatus: ${status}\nBot: ${user.bot === false ? "No" : "Yes" }`)
       .setTimestamp();
-    reply(emb);   
+    reply(emb);
   }
-  
+
 }
 
 module.exports = Userinfo;

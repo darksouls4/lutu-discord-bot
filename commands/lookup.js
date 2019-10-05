@@ -47,8 +47,8 @@ class Lookup extends Command {
       if (!user.user) user.user = user;
       let embed = new Discord.MessageEmbed() // eslint-disable-line prefer-const
         .setTitle(user.user.tag)
-        .setAuthor(message.author.tag, message.author.displayAvatarURL)
-        .setThumbnail(user.user.displayAvatarURL)
+        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setThumbnail(user.user.displayAvatarURL())
         .setColor("#36393e")
         .setTimestamp();
 
