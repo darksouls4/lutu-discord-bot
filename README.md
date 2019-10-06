@@ -1,6 +1,8 @@
 ## About
 Lutu is an open source discord bot with a dashboard and alot of commands. No official instance is online anymore. Use any of the bots named *Lutu* at your own risk.
 
+Special thanks to [Zaydme](https://github.com/Zaydme) for his contributions to the bot.
+
 ## Maintenance
 No new features are going to be implemented outside pull requests from peoples. All issues opened that require fixes will be fixed.
 
