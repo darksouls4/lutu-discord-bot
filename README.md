@@ -1,10 +1,22 @@
+[![MIT](https://img.shields.io/github/license/mashape/apistatus.svg?style=for-the-badge)](https://github.com/MrAugu/lutu-discord-bot/blob/master/LICENSE)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues-raw/MrAugu/lutu-discord-bot?style=for-the-badge)
+![David](https://img.shields.io/david/MrAugu/lutu-discord-bot?style=for-the-badge)
+![node](https://img.shields.io/node/v/discord.js?style=for-the-badge)
+![GitHub stars](https://img.shields.io/github/stars/MrAugu/lutu-discord-bot?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/MrAugu/lutu-discord-bot?style=for-the-badge)
+[![MIT](https://img.shields.io/badge/not%20made%20with-python-blue.svg?style=for-the-badge)](#ye)
+[![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/powered-by-electricity.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/for-you.svg)](https://forthebadge.com)
+
 ## About
 Lutu is an open source discord bot with a dashboard and alot of commands. No official instance is online anymore. Use any of the bots named *Lutu* at your own risk.
 
 Special thanks to [Zaydme](https://github.com/Zaydme) for his contributions to the bot.
 
 ## Maintenance
-No new features are going to be implemented outside pull requests from peoples. All issues opened that require fixes will be fixed.
+No new features are going to be implemented outside pull requests from people. All issues opened that require fixes will be fixed.
 
 For help & support join [MrAugu's Discord Server](https://discord.gg/rk7cVyk).
 
